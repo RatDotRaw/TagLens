@@ -1,3 +1,4 @@
+import datetime
 import re
 import logging
 from typing import List, Set
@@ -15,6 +16,9 @@ class Hashtag:
         self.name = text
         self.count = 1
         self.sources: Set[File] = set()
+
+        self.first_appearance_date: datetime.datetime = None
+        self.last_appearance_date: datetime.datetime = None
 
         self.add_source(source)
     
