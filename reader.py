@@ -109,3 +109,16 @@ def read_all_and_count_hashtags(files: List[File]) -> Set[Hashtag]:
                     h.count += hashtag.count
                     h.sources.update(hashtag.sources)
     return all_unique_hashtags
+
+def count_words(content: str) -> int:
+    """
+    Reads and counts the total amount of words in the given content.
+
+    Args:
+        content (str): The text to count words in.
+
+    Returns:
+        int: The count of words found in the text.
+    """
+    words = re.findall(r"\b\w+\b", content)  # Find all words with pattern
+    return len(words)
