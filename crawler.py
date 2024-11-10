@@ -1,5 +1,7 @@
 import os
 import sys
+import datetime
+from typing import Optional
 
 class File:
     """
@@ -62,3 +64,26 @@ def crawl(path, hidden_files = False) -> set[File]:
             file_set.add(File(root, file, False))
     
     return file_set
+
+# function to get the created time of a file
+def get_created_time(path: str) -> Optional[datetime]:
+    """
+    Returns the creation time of a file.
+
+    Args:
+        path (str): The path to the file you want to get the creation time for.
+    
+    Returns:
+        datetime: The creation time of the file.
+    """
+    # check if the date is in the filename.
+    # example format of filename: 2023_09_25.md
+    pattern = r"(\d{4})_(\d{2})_(\d{2})\.md"
+    match = re.search(pattern, path)
+    if match:
+        year, month, day = map(int, match.groups())
+        return datetime(year, month, day)
+    else: 
+        # disabled because of inaccurate results. git was used on the files.
+        # return datetime.fromtimestamp(os.path.getctime(path))
+        return None
