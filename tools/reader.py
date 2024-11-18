@@ -27,7 +27,8 @@ def read_file(filename) -> str:
 
 # func to find all regex matches in a text
 def find_hashtags(text) -> list:
-    """Finds all hashtags in a given text.
+    """
+    Finds all hashtags in a given text.
 
     Args:
         text (str): The text to search for hashtags.
