@@ -3,15 +3,7 @@ import sys
 import datetime
 from typing import Optional
 
-class File:
-    """
-    A class representing a file.
-    """
-    def __init__(self, path, name, is_dir=False):
-        self.path = path
-        self.name = name
-        self.Is_dir = is_dir
-        self.fullpath = os.path.join(path, name)
+from classes.File import File
 
 def crawl_recursive(path, hidden_files = False, max_depth=None):
     """
