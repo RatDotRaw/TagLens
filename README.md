@@ -3,7 +3,18 @@
 
 ## Installation
 
-TODO: Add installation instructions
+### Prerequisites
+
+* This project has only been tested on Python 3.11.
+
+#### Step 1: Create a virtual environment and install the required packages
+
+1. On Linux: `python3 -m venv .venv`
+2. On Windows: `.venv\Scripts\activate` (to activate the virtual environment)
+
+#### Step 2: Install the required packages
+
+1. Run: `pip install -r requirements.txt`
 
 ## Usage
 
