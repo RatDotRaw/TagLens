@@ -1,10 +1,11 @@
 # Data Collected by My LogSeq Journal Scraper
 
 ## Page Content
-- [] Tags in pages.
-- [] Count of tags used in page
-- [] Count of all words (except tags)
-- [] Count of unique tags per page
+- [] Page title
+- [x] Tags in pages.
+- [x] Count of tags used in page
+- [x] Count of all words (except tags)
+- [x] Count of unique tags per page
 - [] sentiment analysis of the page content using a pre-trained model.
 - [] category of the page (e.g., work, personal, etc.)
 
