@@ -13,5 +13,5 @@
 - [x] Total count of tag
 - [x] Source of where the tag was found (path to the file)
   - [x] Count of notes for the tag
-- [] Date when the tag was first used in a note
-- [] Date when the tag was last used in a note
+- [x] Date when the tag was first used in a note
+- [x] Date when the tag was last used in a note
