@@ -75,7 +75,7 @@ def get_page_date(file_name: str) -> Optional[datetime]:
     match = re.search(pattern, file_name)
     if match:
         year, month, day = map(int, match.groups())
-        return datetime(year, month, day)
+        return datetime.date(year, month, day)
     else: 
         # disabled because of inaccurate results. git was used on the files.
         # return datetime.fromtimestamp(os.path.getctime(path))
