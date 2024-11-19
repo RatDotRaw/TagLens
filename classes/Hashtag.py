@@ -12,6 +12,8 @@ class Hashtag:
         hashtag (str): The text of the hashtag.
         count (int): The number of times the hashtag appears in the text.   
         source (Set[File]): A set of files where the hashtag appears.
+        first_appearance_date (datetime.datetime): The date and time when the first appearance of the hashtag was found.
+        last_appearance_date (datetime.datetime): The date and time when the last appearance of the hashtag was found.
     """
     def __init__(self, text, source):
         self.name = text

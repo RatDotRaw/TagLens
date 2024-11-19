@@ -1,11 +1,24 @@
 import datetime
 from classes.File import File
 import tools.crawler as crawler
+import tools.reader as reader
 from classes.Hashtag import Hashtag
 
 class Page:
     """
-    TODO: write description for the page class
+    A container class to hold information about a Logseq page.
+
+    Attributes:
+        file: The original File object that this Page is based on.
+        tag_count: The total number of tags associated with this page.
+        hashtags: A set of Hashtag objects representing the unique tags used on this page.
+        word_count: The total number of words in the text of this page.
+        sentiment_tags: A set of SentimentTag objects indicating the sentiment analysis result for this page.
+        category: A dictionary containing the categorization result for this page.
+        date: The date when the file was created, inferred from its filename.
+
+    Methods:
+        TODO: (add methods here as they are implemented)
     """
     def __init__(self, file: File):
         self.file: File = file
@@ -15,4 +28,3 @@ class Page:
         self.sentiment_tags = set() # TODO: fill sentiment tags in
         self.category = {} # TODO: analyse and fill in page category.
 
-        self.date: datetime = crawler.get_page_date(file.name) # date in the files filename # creation date of file is not trustworthy because of git.

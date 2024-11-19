@@ -5,7 +5,7 @@ from classes.Hashtag import Hashtag
 from classes.File import File
 
 # func to read and return the content of a text file
-def read_file(filename) -> str:
+def read_file(filename: str) -> str:
     """Reads a text file and returns its content.
     
     Args:
@@ -26,7 +26,7 @@ def read_file(filename) -> str:
         return ""
 
 # func to find all regex matches in a text
-def find_hashtags(text) -> list:
+def find_hashtags(text) -> list[str]:
     """
     Finds all hashtags in a given text.
 
@@ -34,10 +34,10 @@ def find_hashtags(text) -> list:
         text (str): The text to search for hashtags.
     
     Returns:
-        set: A set of unique hashtags found in the text.
+        set: A set ofunique hashtags found in the text in string format.
     """
     re_pattern = r"#([^\[.,!?;:\s#]+)|#\[\[([^\]]+)\]\]"
-    return [match[0] if match[0] else match[1] for match in re.findall(re_pattern, text)]
+    return [match[0] if match[0] else match[1] for match in re.findall(re_pattern, text)] # returns a list of matches from the regex tuples result
 
 def read_and_count_hashtags(file: File) -> Set[Hashtag]:
     """
