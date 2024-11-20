@@ -16,4 +16,7 @@ def text_to_emotions(sentence: str):
     """
     model_outputs = classifier(sentence)[0]
     results = sorted(model_outputs, key=lambda x: x['score'], reverse=True)
+
+    # sort the tags by their scores
+    results = sorted(results, key=lambda x: x['score'], reverse=True)
     return results

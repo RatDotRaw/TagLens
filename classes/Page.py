@@ -3,6 +3,25 @@ from classes.File import File
 import tools.crawler as crawler
 import tools.reader as reader
 from classes.Hashtag import Hashtag
+import tools.analysis as analysis
+
+class SentimentTag:
+    """
+    A class to represent the sentiment analysis result for a page.
+
+    Attributes:
+        text: The text that was analyzed.
+        sentiment: A string indicating the sentiment of the text ('positive', 'negative', or 'neutral').
+        confidence: A float representing the confidence level of the sentiment analysis (0-1).
+
+    Methods:
+        TODO: (add methods here as they are implemented)
+    """
+    def __init__(self, text: str, sentiment: str, confidence: float):
+        self.text = text
+        self.sentiment = sentiment
+        self.confidence = confidence
+
 
 class Page:
     """
@@ -26,9 +45,10 @@ class Page:
         self.tag_count: int = 0
         self.hashtags: Hashtag = set() 
         self.word_count: int = 0
-        self.sentiment_tags = set() # TODO: fill sentiment tags in
+        self.sentiment_tags: list[dict] = None # TODO: fill sentiment tags in
         self.category = {} # TODO: analyse and fill in page category.
 
+        self.journal_entry: bool = False 
         self.date: datetime = crawler.get_page_date(file.name) # date in the files filename # creation date of file is not trustworthy because of git.
 
         # update not set variables with data from file
@@ -61,3 +81,24 @@ class Page:
         content = reader.read_file(self.file.fullpath)
         self.word_count = reader.count_words(content)
         return self.word_count
+    
+    # DO NOT RUN ON INIT OR IT WILL BE TOO SLOW. ONLY RUN WHEN REQUIRED.
+    def Update_sentiment_tags(self, threshold: float = 0.2):
+        """
+        Analyzes the sentiment of the page content and updates self.sentiment_tags
+        Do not run on init or it will be too slow. Only run when required.
+
+        Args:
+            threshold (float): The minimum confidence level required for a sentiment tag to be added to the set. Defaults to 0.1.
+
+        Returns:
+            None
+        """
+        content = reader.read_file(self.file.fullpath)
+        tag_scores = analysis.text_to_emotions(content)
+
+        # remove tags with confidence less than threshold
+        for tag in tag_scores[:]:
+            if tag["score"] < threshold:
+                tag_scores.remove(tag)
+        self.sentiment_tags = tag_scores
