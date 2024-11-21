@@ -9,8 +9,12 @@
 
 #### Step 1: Create a virtual environment and install the required packages
 
-1. On Linux: `python3 -m venv .venv`
-2. On Windows: `.venv\Scripts\activate` (to activate the virtual environment)
+`python3 -m venv .venv`
+
+#### Step 2: Activate the virtual environment
+
+1. On Windows: `.venv\Scripts\activate` (to activate the virtual environment)
+2. On linux & macOS: `source .venv/bin/activate`
 
 #### Step 2: Install the required packages
 
@@ -19,6 +23,7 @@
 ## Usage
 
 TODO: Add usage instructions
+run the main script with `python main.py`
 
 ## Contributing
 
