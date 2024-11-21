@@ -16,7 +16,7 @@
 1. On Windows: `.venv\Scripts\activate` (to activate the virtual environment)
 2. On linux & macOS: `source .venv/bin/activate`
 
-### Step 2: Install the required packages
+### Step 3: Install the required packages
 
 1. Run: `pip install -r requirements.txt`
 
@@ -25,16 +25,18 @@
 TODO: Add usage instructions
 run the main script with `python main.py`
 
-## Docs
+## Progress
 
-Check out the `docs/` for what the project currently does.
+You can view the current progress and to do list in `progress.md`
 
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
+~~Please make sure to update tests as appropriate.~~ (I wrote no tests myself :-( )
+
+Don't know what to contribure, search for `TODO:` in the code!
 
 ## License
 
