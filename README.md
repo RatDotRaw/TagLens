@@ -7,16 +7,16 @@
 
 * This project has only been tested on Python 3.11.
 
-#### Step 1: Create a virtual environment and install the required packages
+### Step 1: Create a virtual environment and install the required packages
 
 `python3 -m venv .venv`
 
-#### Step 2: Activate the virtual environment
+### Step 2: Activate the virtual environment
 
 1. On Windows: `.venv\Scripts\activate` (to activate the virtual environment)
 2. On linux & macOS: `source .venv/bin/activate`
 
-#### Step 2: Install the required packages
+### Step 2: Install the required packages
 
 1. Run: `pip install -r requirements.txt`
 
@@ -24,6 +24,10 @@
 
 TODO: Add usage instructions
 run the main script with `python main.py`
+
+## Docs
+
+Check out the `docs/` for what the project currently does.
 
 ## Contributing
 
