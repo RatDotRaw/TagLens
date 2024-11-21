@@ -65,7 +65,7 @@ def read_pages():
             page.Update_sentiment_tags(threshold=0.3)
 
 def main():
-    # hashtag_set = read_hashtags()
+    hashtag_set = read_hashtags()
     page_set = read_pages()
     
 
