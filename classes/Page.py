@@ -97,8 +97,9 @@ class Page:
         content = reader.read_file(self.file.fullpath)
         tag_scores = analysis.text_to_emotions(content)
 
+        filtered = []
         # remove tags with confidence less than threshold
-        for tag in tag_scores[:]:
-            if tag["score"] < threshold:
-                tag_scores.remove(tag)
-        self.sentiment_tags = tag_scores
+        for tag in tag_scores:
+            if tag["score"] > threshold:
+                filtered.append(tag)
+        self.sentiment_tags = filtered
