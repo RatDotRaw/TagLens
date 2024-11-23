@@ -1,8 +1,9 @@
 import os
-from dotenv import load_dotenv
+import json
 import logging
-from neo4j import GraphDatabase
 from classes.Page import Page
+from dotenv import load_dotenv
+from neo4j import GraphDatabase
 from classes.Hashtag import Hashtag
 
 load_dotenv()
@@ -31,18 +32,11 @@ class Neo4jIntegration:
         """Ensure necessary constraints in the database."""
         queries = [
             # Page Content constraints
-            "CREATE CONSTRAINT page_title_unique IF NOT EXISTS FOR (p:Page) REQUIRE p.title IS UNIQUE",
-            "CREATE CONSTRAINT tag_name_unique IF NOT EXISTS FOR (t:Tag) REQUIRE t.name IS UNIQUE",
-            # Indexes for performance optimization
-            "CREATE INDEX page_tags_index IF NOT EXISTS FOR (p:Page) ON (p.tags)",
-            "CREATE INDEX page_word_count_index IF NOT EXISTS FOR (p:Page) ON (p.wordCount)",
-            "CREATE INDEX page_unique_tags_count_index IF NOT EXISTS FOR (p:Page) ON (p.uniqueTagsCount)",
-            "CREATE INDEX page_sentiment_index IF NOT EXISTS FOR (p:Page) ON (p.sentiment)",
-            # Tags-specific constraints and indexes
-            "CREATE INDEX tag_total_count_index IF NOT EXISTS FOR (t:Tag) ON (t.totalCount)",
-            "CREATE CONSTRAINT source_path_unique IF NOT EXISTS FOR (s:Source) REQUIRE s.path IS UNIQUE",
-            "CREATE INDEX tag_first_used_date_index IF NOT EXISTS FOR (t:Tag) ON (t.firstUsed)",
-            "CREATE INDEX tag_last_used_date_index IF NOT EXISTS FOR (t:Tag) ON (t.lastUsed)"
+            "CREATE CONSTRAINT page_name_unique IF NOT EXISTS FOR (p:Page) REQUIRE p.name IS UNIQUE",
+            "CREATE CONSTRAINT hashtag_name_unique IF NOT EXISTS FOR (t:Hashtag) REQUIRE t.name IS UNIQUE",
+            # Constraints on name
+            "CREATE CONSTRAINT hashtag_name_unique IF NOT EXISTS FOR (h:Hashtag) REQUIRE h.name IS UNIQUE",
+            "CREATE CONSTRAINT source_unique IF NOT EXISTS FOR (s:Source) REQUIRE s.path IS UNIQUE",
         ]
 
         with self.driver.session() as session:
@@ -62,7 +56,7 @@ class Neo4jIntegration:
             hashtag (Hashtag): The Hashtag object containing data to insert or update.
         """
         query = """
-        MERGE (t:Tag {name: $name})
+        MERGE (t:Hashtag {name: $name})
         ON CREATE SET 
             t.totalCount = $count,
             t.firstUsed = $first_appearance_date,
@@ -98,6 +92,7 @@ class Neo4jIntegration:
         Args:
             page: The object containing data about the page to insert or update.
         """
+
         query = """
         MERGE (p:Page {name: $name})
         SET 
@@ -119,8 +114,8 @@ class Neo4jIntegration:
             "file_name": page.file.path,
             "tag_count": page.tag_count,
             "word_count": page.word_count,
-            "sentiment_tags": page.sentiment_tags or [],
-            "category": page.category or {},
+            "sentiment_tags": json.dumps(page.sentiment_tags or []),  # convert sentiment_tags to JSON string
+            "category": page.category or None, 
             "journal_entry": page.journal_entry,
             "date": page.date.isoformat() if page.date else None,
             "hashtags": [hashtag.name for hashtag in page.hashtags],
