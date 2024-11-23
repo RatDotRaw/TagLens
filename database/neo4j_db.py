@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import logging
 from neo4j import GraphDatabase
 from classes.Page import Page
+from classes.Hashtag import Hashtag
 
 load_dotenv()
 
@@ -90,3 +91,50 @@ class Neo4jIntegration:
             except Exception as e:
                 logging.error(f"Failed to insert/update hashtag: {hashtag.name} with error: {e}")
 
+    def insert_page(self, page: Page):
+        """
+        Insert or update a Page in the database.
+
+        Args:
+            page: The object containing data about the page to insert or update.
+        """
+        query = """
+        MERGE (p:Page {name: $name})
+        SET 
+            p.fileName = $file_name,
+            p.tagCount = $tag_count,
+            p.wordCount = $word_count,
+            p.sentimentTags = $sentiment_tags,
+            p.category = $category,
+            p.journalEntry = $journal_entry,
+            p.date = $date
+        WITH p
+        UNWIND $hashtags AS hashtag_name
+        MERGE (t:Tag {name: hashtag_name})
+        MERGE (p)-[:CONTAINS]->(t)
+        """
+
+        parameters = {
+            "name": page.name,
+            "file_name": page.file.path,
+            "tag_count": page.tag_count,
+            "word_count": page.word_count,
+            "sentiment_tags": page.sentiment_tags or [],
+            "category": page.category or {},
+            "journal_entry": page.journal_entry,
+            "date": page.date.isoformat() if page.date else None,
+            "hashtags": [hashtag.name for hashtag in page.hashtags],
+        }
+
+        with self.driver.session() as session:
+            try:
+                session.run(query, parameters)
+                logging.info(f"Inserted/Updated page: {page.name}")
+            except Exception as e:
+                logging.error(f"Failed to insert/update page: {page.name} with error: {e}")
+
+
+neo4j_db = Neo4jIntegration()
+neo4j_db.connect()
+neo4j_db.ensure_constraints()
+neo4j_db.close()
