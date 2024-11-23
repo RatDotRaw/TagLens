@@ -1,5 +1,5 @@
 from classes.File import File
-
+import tools.crawler as crawler
 
 import datetime
 from typing import Set
@@ -28,5 +28,14 @@ class Hashtag:
     def __hash__(self):
         return hash(self.name)  # Use name for hashing
 
-    def add_source(self, source):
+    def add_source(self, source: File):
+        date = crawler.get_page_date(source.name)
+        if date:
+            # check if the date is newer than the current first appearance or older than the last appearance
+            if self.first_appearance_date is None or date < self.first_appearance_date:
+                self.first_appearance_date = date
+
+            if self.last_appearance_date is None or date > self.last_appearance_date:
+                self.last_appearance_date = date
+
         self.sources.add(source)
