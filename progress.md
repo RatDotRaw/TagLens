@@ -2,13 +2,13 @@
 
 ## saving data into database
 
-- [ ] research what database to use (neo4j, NetworkX (serverless), simple csv)
+- [x] research what database to use (neo4j, NetworkX (serverless), simple csv)
   - [ ] save gathered data in database
 
 
 ## Technical
 
-- [ ] Move Tag specific logic from function into the `Hashtag` class
+- [x] Move Tag specific logic from function into the `Hashtag` class
 
 ## Page Content
 
