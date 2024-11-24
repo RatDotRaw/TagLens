@@ -2,6 +2,7 @@ import tools.crawler as crawler
 import tools.reader as reader
 from classes.Page import Page
 import logging
+from database.neo4j_db import neo4j_db
 
 logseq_base_path = "/home/stafd/Documents/git/logseq"
 
@@ -26,25 +27,38 @@ def read_pages():
     pages_set: set[Page] = set()
     for file in journal_files:
         page = Page(file)
-        
         # set Page.journal_entry to true for all journal entries
         page.journal_entry = True
-
         pages_set.add(page)
+
+    for file in pages_files:
+        page = Page(file)
+        pages_set.add(page)
+
     logging.info(f"Total pages loaded: ${len(pages_set)}")
     
     # Set sentiments for only journal entries
     logging.info("Updating sentiment tags for journal entries")
     for page in pages_set:
-        print(f"page: {page.name}, journal entry: {page.journal_entry}")
         if page.journal_entry:
             logging.info(f"Updating sentiment tags for {page.name}")
             page.Update_sentiment_tags(threshold=0.3)
 
+    return pages_set
+
 def main():
+    print("Starting Logseq data extraction")
+
     hashtag_set = read_hashtags()
     page_set = read_pages()
+
+    for hashtag in hashtag_set:
+        neo4j_db.insert_hashtag(hashtag)
     
+    for page in page_set:
+        neo4j_db.insert_page(page)
+
+    print("Finished Logseq data extraction")
 
 if __name__ == "__main__":
     main()
