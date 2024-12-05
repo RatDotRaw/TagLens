@@ -3,8 +3,10 @@
 ## saving data into database
 
 - [x] research what database to use (neo4j, NetworkX (serverless), simple csv)
-  - [ ] save gathered data in database
+  - [x] save gathered data in database
+  - [ ] extra: save data in sqlite database
 
+I chose for neo4j because it is a graph database that can handle the complexity of my data. it also has a web interface that allows me to visualize the data in a graph format and query the data in a graph format.
 
 ## Technical
 
@@ -32,3 +34,8 @@ Why gather info of tags? In my final projecta application, I am going to make a 
   - [x] Count of notes for the tag
 - [x] Date when the tag was first used in a note
 - [x] Date when the tag was last used in a note
+
+
+# sources
+
+ - https://docs.sqlalchemy.org/en/20/orm/quickstart.html

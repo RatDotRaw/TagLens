@@ -2,7 +2,8 @@ import tools.crawler as crawler
 import tools.reader as reader
 from classes.Page import Page
 import logging
-from database.neo4j_db import neo4j_db
+from database.neo4j.neo4j_db import neo4j_db
+from database.sqlite.sqlite_db import sqlite_db
 
 logseq_base_path = "/home/stafd/Documents/git/logseq"
 
