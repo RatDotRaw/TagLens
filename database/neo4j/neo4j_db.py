@@ -47,7 +47,13 @@ class Neo4jIntegration:
                     logging.info(f"Executed: {query}")
                 except Exception as e:
                     logging.error(f"Failed to execute: {query} with error: {e}")
-        
+    
+    def insert_file(self, file):
+        """
+        Insert a file into the database.
+        """
+        print("I am a lazy dev (not implemented yet! :D)")
+
     def insert_hashtag(self, hashtag: Hashtag):
         """
         Insert or update a hashtag in the database.

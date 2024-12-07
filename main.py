@@ -1,8 +1,12 @@
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
 import tools.crawler as crawler
 import tools.reader as reader
 from classes.Page import Page
 import logging
-from database.neo4j_db import neo4j_db
+from database.DatabaseFactory import DatabaseFactory
 
 logseq_base_path = "/home/stafd/Documents/git/logseq"
 
@@ -47,16 +51,24 @@ def read_pages():
     return pages_set
 
 def main():
+    # creating a connection to the database
+    database = DatabaseFactory.create_database(os.getenv('DB_TYPE'))
+    database.connect()
+
     print("Starting Logseq data extraction")
 
     hashtag_set = read_hashtags()
     page_set = read_pages()
 
+    # insert all hashtags into database
+    print(f"Inserting {len(hashtag_set)} hashtags into the database")
     for hashtag in hashtag_set:
-        neo4j_db.insert_hashtag(hashtag)
+        database.insert_hashtag(hashtag)
     
+    # insert all pages into datase
+    print(f"Inserting {len(page_set)} pages into the database")
     for page in page_set:
-        neo4j_db.insert_page(page)
+        database.insert_page(page)
 
     print("Finished Logseq data extraction")
 
