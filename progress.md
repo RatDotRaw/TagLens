@@ -8,6 +8,8 @@
 
 I chose for neo4j because it is a graph database that can handle the complexity of my data. it also has a web interface that allows me to visualize the data in a graph format and query the data in a graph format.
 
+- I didn't really use the full potential of neo4j database. So I decided to also save the data in a SQLite database for easier use and familiarity.
+
 ## Technical
 
 - [x] Move Tag specific logic from function into the `Hashtag` class
