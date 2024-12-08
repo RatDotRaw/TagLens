@@ -6,3 +6,7 @@ https://docs.sqlalchemy.org/en/20/orm/quickstart.html
 
 Bee Movie Script: https://gist.github.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a
 
+A multitude of chat models where used in the project, not all conversations are listed. Reason why not; 
+ - Some conversations where local and in editor.
+ - platforms that don't have a share feature.
+ - not notable conversations.

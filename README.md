@@ -11,7 +11,7 @@
 
 `python3 -m venv .venv`
 
-### Step 2: Activate the virtual environment
+### Step 2: Activate the virtual environment (optional, but recommended)
 
 1. On Windows: `.venv\Scripts\activate` (to activate the virtual environment)
 2. On linux & macOS: `source .venv/bin/activate`
@@ -22,8 +22,20 @@
 
 ## Usage
 
-TODO: Add usage instructions
-run the main script with `python main.py`
+### Scraper (Challenge 2)
+
+> [!IMPORTANT]
+> Without running the scraper first, the database will be empty and thus no data will be shown on the webui.
+
+What does the scraper do? It reads a Logseq library and extracts all hashtags.
+Then it saves them into the chosen database type.
+
+To run the scraper, use the following command: `python scraper.py`
+
+### WebUI (Challenge 3)
+
+To run the webui, use the following command: `python webui.py`
+
 
 ## Progress
 
@@ -34,7 +46,7 @@ You can view the current progress and to do list in `progress.md`
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
-~~Please make sure to update tests as appropriate.~~ (I wrote no tests myself :-( )
+~~Please make sure to update tests as appropriate.~~ (I wrote no tests :(, but you should! :D)
 
 Don't know what to contribure, search for `TODO:` in the code!
 

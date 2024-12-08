@@ -40,3 +40,34 @@ Why gather info of tags? In my ~~final projecta application, I am going to make 
   - [x] Count of notes for the tag
 - [x] Date when the tag was first used in a note
 - [x] Date when the tag was last used in a note
+
+## webui (Challenge 3)
+
+### Technical Checklist:
+
+- [ ] Set up a basic Flask project structure:
+
+  Think a bit ahead of how the project structure is going to be structured. Think about how you will organize your routes, templates, static files, and other components.
+
+- [ ] Prepare a list of data to be visualized:
+
+  Quickly list out the data that you want to visualize. This could include counts of tags, sentiment analysis results, page titles, etc.
+
+  information visualized on the webui:
+    - Tag name
+
+- [ ] Implement the web application logic:
+  - [ ] Create view functions in `views.py` to handle requests and responses.
+  - [ ] Create templates in the `templates` directory for HTML rendering.
+  
+- [ ] Connect the web application to the database:
+  - [ ] Use SQLAlchemy or other ORM to interact with the SQLite database.
+  - ~~[ ] Use Neo4j with py2neo to interact with the Neo4j database.~~ (no more neo4j, sqlite database has been chosen and is more structured)
+  - [ ] Create models to represent entities (e.g., Tag, Page).
+
+- [ ] Implement data retrieval and display:
+  - [ ] Fetch data from the database using the Flask route handlers.
+  - [ ] Pass data to the templates for rendering.
+
+- [ ] Enhance user experience:
+  - [ ] Display analytics and insights in a visually appealing manner (e.g., charts, graphs).
