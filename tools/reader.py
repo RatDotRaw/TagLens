@@ -84,7 +84,9 @@ def read_all_and_count_hashtags(files: List[File]) -> Set[Hashtag]:
             for h in all_unique_hashtags:
                 if h.name == hashtag.name:
                     h.count += hashtag.count
-                    h.sources.update(hashtag.sources)
+                    # h.sources.update(hashtag.sources) # doesn't update dates
+                    for s in hashtag.sources:
+                        h.add_source(s)
     return all_unique_hashtags
 
 def count_words(content: str) -> int:
