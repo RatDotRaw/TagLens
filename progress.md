@@ -45,7 +45,7 @@ Why gather info of tags? In my ~~final projecta application, I am going to make 
 
 ### Technical Checklist:
 
-- [ ] Set up a basic Flask project structure:
+- [x] Set up a basic Flask project structure:
 
   Think a bit ahead of how the project structure is going to be structured. Think about how you will organize your routes, templates, static files, and other components.
 
