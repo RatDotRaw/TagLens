@@ -34,6 +34,13 @@ class File(Base):
     # One-to-One relationship with Page
     page = relationship('Page', back_populates='file', uselist=False)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'fullpath': self.fullpath
+        }
+
 class Page(Base):
     __tablename__ = 'pages'
     
@@ -51,6 +58,19 @@ class Page(Base):
     file_id = Column(Integer, ForeignKey('Files.id'))
     file = relationship('File', back_populates='page')
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'file_name': self.file_name,
+            'tag_count': self.tag_count,
+            'word_count': self.word_count,
+            'sentiment_tags': self.sentiment_tags,
+            'category': self.category,
+            'journal_entry': self.journal_entry,
+            'date': self.date
+        }
+
 class Hashtag(Base):
     __tablename__ = 'hashtags'
     
@@ -66,3 +86,12 @@ class Hashtag(Base):
         secondary='file_hashtags',
         back_populates='hashtags'
     )
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'total_count': self.total_count,
+            'first_appearance_date': self.first_appearance_date,
+            'last_appearance_date': self.last_appearance_date
+        }
