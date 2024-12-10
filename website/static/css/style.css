@@ -6,10 +6,44 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 #chart-container {
     width: 80%;
     max-width: 800px;
 }
+
+/* textarea notes class makeup */
+textarea {
+    width: 50%;
+    height: 12rem;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+/* Dashed border */
+hr {
+    width: 75%;
+    margin: 20px 0;
+}
+hr.dashed {
+    border-top: 2px dashed #000000;
+  }
+  
+  /* Dotted border */
+  hr.dotted {
+    border-top: 2px dotted #000000;
+  }
+  
+  /* Solid border */
+  hr.solid {
+    border-top: 2px solid #000000;
+  }
+  
+  /* Rounded border */
+  hr.rounded {
+    border-top: 6px solid #000000;
+    border-radius: 5px;
+  }
