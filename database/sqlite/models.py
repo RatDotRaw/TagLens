@@ -93,5 +93,6 @@ class Hashtag(Base):
             'name': self.name,
             'total_count': self.total_count,
             'first_appearance_date': self.first_appearance_date,
-            'last_appearance_date': self.last_appearance_date
+            'last_appearance_date': self.last_appearance_date,
+            'files': [{'id': file.id, 'filename': file.name} for file in self.files]
         }
