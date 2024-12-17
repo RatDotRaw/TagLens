@@ -125,6 +125,14 @@ function draw_first_last_date_hashtag(hashtags) {
                 },
             ],
         },
+        options: {
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        }
     });
 }
 
@@ -133,7 +141,7 @@ function draw_hash_usage(hashtags) {
 
     // get 20 most used hashtags
     hashtags.sort((a, b) => b.total_count - a.total_count);
-    hashtags = hashtags.slice(0, 50);
+    hashtags = hashtags.slice(0, 25);
 
     // create chart data
     const labels = hashtags.map((hashtag) => hashtag.name);
@@ -154,6 +162,14 @@ function draw_hash_usage(hashtags) {
                 },
             ],
         },
+        options: {
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        }
     });
 }
 
@@ -221,6 +237,14 @@ function draw_hash_note_journal(hashtags) {
                 },
             ],
         },
+        options: {
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        }
     });
     var myChart_journal = new Chart(ctx_journal, {
         type: "bar",
@@ -236,5 +260,13 @@ function draw_hash_note_journal(hashtags) {
                 },
             ],
         },
+        options: {
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        }
     });
 }
