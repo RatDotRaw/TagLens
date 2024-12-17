@@ -1,43 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Visualization</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- <script src="{{ url_for('static', filename='js/chart.js') }}"></script> -->
-</head>
-<body>
-    <h1>Logseq hashtag analysis</h1>
-    <p>This project is generalized. You'll have to supply your own Logseq knowledge base and make your own conclusions.</p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Data Visualization</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/style.css') }}"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- <script src="{{ url_for('static', filename='js/chart.js') }}"></script> -->
+    </head>
+    <body>
+        <h1>Logseq hashtag analysis</h1>
+        <p>
+            This project is generalized. You'll have to supply your own Logseq
+            knowledge base and make your own conclusions.
+        </p>
 
-    <h2>Hashtag longevity</h2>
-    <p>If you have a big Logseq knowledge base, there are hashtags that are bound to be forgotten.</p>
-    <p>lets first analyse the hashtag use troughout the year.</p>
-    <div id="chart-container">
-        <canvas id="HashDateLine"></canvas>
-    </div>
-    <p>now, you you see any spikes in the graph? an influx of new hashtags or a sudden drop in usage? That could be a sign of something interesting happening.</p>
-    <!-- little text field to note down -->
-    <textarea class="notes" placeholder="Notes you want to make..."></textarea>
-    <hr class="dashed">
-    <p>now, what are the most used hashtags?</p>
-    <p>Let's first start off with the most used hashtags overall.</p>
-    <div id="chart-container">
-        <canvas id="HashUse"></canvas>
-    </div>
-    <p>Not much insights here... Let's split the hashtags by note and journal entry</p>
-    <p>A quick note: if an entry is in both a note and a journal entry, it will be sorted as a journal entry.</p>
-    <p>Now, let's see how the top hashtags are used in notes and journal entries separately.
-    <div id="chart-container">
-        <canvas id="HashPage"></canvas>
-        <canvas id="HashJournal"></canvas>
-    </div>
-    <p>now, what are the most used hashtags? What might be the relation between the most used one and their presence in notes and journal entries?</p>
-    
-    <textarea class="notes" placeholder="Notes you want to make..."></textarea>
-    
-    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
-</body>
+        <h2>Hashtag longevity</h2>
+        <p>
+            If you have a big Logseq knowledge base, there are hashtags that are
+            bound to be forgotten.
+        </p>
+        <p>lets first analyse the hashtag use troughout the year.</p>
+        <div class="chart-container">
+            <canvas id="HashDateLine"></canvas>
+        </div>
+        <p>
+            now, you you see any spikes in the graph? an influx of new hashtags
+            or a sudden drop in usage? That could be a sign of something
+            interesting happening.
+        </p>
+        <textarea
+            class="notes"
+            placeholder="Notes you want to make..."
+        ></textarea>
+        <hr class="dashed" />
+        <p>now, what are the most used hashtags?</p>
+        <p>Let's first start off with the most used hashtags overall.</p>
+        <div class="chart-container">
+            <canvas id="HashUse"></canvas>
+        </div>
+        <p>
+            Not much insights here... Let's split the hashtags by note and
+            journal entry
+        </p>
+        <p>
+            A quick note: if an entry is in both a note and a journal entry, it
+            will be sorted as a journal entry.
+        </p>
+        <p>
+            Now, let's see how the top hashtags are used in notes and journal
+            entries separately.
+        </p>
+
+        <div class="chart-container sideBySide">
+            <canvas id="HashPage"></canvas>
+            <canvas id="HashJournal"></canvas>
+        </div>
+        <p>
+            now, what are the most used hashtags? What might be the relation
+            between the most used one and their presence in notes and journal
+            entries? What are the categories a hashtag might belong to?
+        </p>
+        <textarea
+            class="notes"
+            placeholder="Notes you want to make..."
+        ></textarea>
+        <hr class="dashed" />
+        
+        <script
+            src="{{ url_for('static', filename='js/app.js') }}"
+            defer
+        ></script>
+    </body>
 </html>
