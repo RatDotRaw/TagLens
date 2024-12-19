@@ -47,6 +47,8 @@ async function fetchdata() {
     draw_first_last_date_hashtag(hashtags);
     draw_hash_usage(hashtags);
     draw_hash_note_journal(hashtags);
+
+    draw_pages_dates(pages)
 }
 
 // convert a string date to a date object
@@ -223,7 +225,7 @@ function draw_hash_note_journal(hashtags) {
         (hashtag) => hashtag.total_count
     );
 
-    var myChart = new Chart(ctx_page, {
+    new Chart(ctx_page, {
         type: "bar",
         data: {
             labels: labels_page,
@@ -246,7 +248,7 @@ function draw_hash_note_journal(hashtags) {
             }
         }
     });
-    var myChart_journal = new Chart(ctx_journal, {
+    new Chart(ctx_journal, {
         type: "bar",
         data: {
             labels: labels_journal,
@@ -258,6 +260,59 @@ function draw_hash_note_journal(hashtags) {
                     borderColor: "rgba(54, 162, 235, 1)",
                     borderWidth: 1,
                 },
+            ],
+        },
+        options: {
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        }
+    });
+}
+
+function draw_pages_dates(pages) {
+    const ctx = document.getElementById("PageDates").getContext('2d');
+    
+    const labels = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+
+    // Sort pages by month
+    let pages_dates = Array(12).fill(0); // Initialize counts for each month
+    pages.forEach((pages) => {
+        let month = pages.date.getMonth(); // 0-based index for months
+        pages_dates[month]++;
+    });
+
+    console.log(pages_dates); // Debugging output
+
+    // Create the radar chart
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels, // Month labels
+            datasets: [
+                {
+                    label: "Page creation date",
+                    data: pages_dates, // Data for each month
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1,
+                }
             ],
         },
         options: {

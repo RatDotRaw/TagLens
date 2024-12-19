@@ -17,8 +17,8 @@
             This project is generalized. You'll have to supply your own Logseq
             knowledge base and make your own conclusions.
         </p>
-
-        <h2>Hashtag longevity</h2>
+        <h2>Hashtags</h2>
+        <h3>Hashtag longevity</h3>
         <p>
             If you have a big Logseq knowledge base, there are hashtags that are
             bound to be forgotten.
@@ -69,7 +69,13 @@
             placeholder="Notes you want to make..."
         ></textarea>
         <hr class="dashed" />
-        
+        <h2>Pages</h2>
+        <p>lets take a dive into the logseq pages, and see what we can learn from them</p>
+        <div class="chart-container">
+            <canvas id="PageDates"></canvas>
+        </div>
+        <p>I bet this chart may look very familiar to you. </p>
+
         <script
             src="{{ url_for('static', filename='js/app.js') }}"
             defer
