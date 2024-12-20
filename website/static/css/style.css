@@ -15,6 +15,13 @@ body {
     flex-direction: row;
 } */
 
+.left-liner {
+  align-items: start;
+}
+.left-liner * {
+  margin: 0;
+}
+
 .chart-container {
     width: 80%;
     max-width: 800px;

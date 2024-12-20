@@ -12,12 +12,12 @@
         <!-- <script src="{{ url_for('static', filename='js/chart.js') }}"></script> -->
     </head>
     <body>
-        <h1>Logseq hashtag analysis</h1>
+        <h1>Logseq knowledge base analysis</h1>
         <p>
             This project is generalized. You'll have to supply your own Logseq
             knowledge base and make your own conclusions.
         </p>
-        <h2>Hashtags</h2>
+        <h2>Hashtags-level analysis</h2>
         <h3>Hashtag longevity</h3>
         <p>
             If you have a big Logseq knowledge base, there are hashtags that are
@@ -69,7 +69,22 @@
             placeholder="Notes you want to make..."
         ></textarea>
         <hr class="dashed" />
-        <h2>Pages</h2>
+        <h2>Page-level analysis</h2>
+
+        <p>Lets first take a peak at some broad statistics.</p>
+        <div class="left-liner">
+            <p id="page-count"></p>
+            <p id="journal-to-page-ratio"></p>
+
+            <p id="total-words"></p>
+            <p id="average-words"></p>
+            <p id="average-words-journal"></p>
+            <p id="average-words-page"></p>
+            
+            <p id="average-tags"></p>
+            <p>TODO: do the same sub categories for hashtags as we did for words.</p>
+        </div>
+
         <p>lets take a dive into the logseq pages, and see what we can learn from them</p>
         <div class="chart-container">
             <canvas id="PageDates"></canvas>

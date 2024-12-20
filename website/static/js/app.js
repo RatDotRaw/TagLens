@@ -58,6 +58,7 @@ async function fetchdata() {
     draw_hash_usage(hashtags);
     draw_hash_note_journal(hashtags);
 
+    show_basic_page_stats(pages)
     draw_pages_dates(pages)
 }
 
@@ -290,6 +291,62 @@ function draw_hash_note_journal(hashtags) {
 /////////////
 /// Pages ///
 /////////////
+
+function show_basic_page_stats(pages) {
+    let ctx_pages_count = document.getElementById("page-count")
+    let ctx_journal_to_page_ratio = document.getElementById("journal-to-page-ratio")
+    let ctx_total_words = document.getElementById("total-words")
+
+    let ctx_average_words = document.getElementById("average-words")
+    let ctx_average_words_journal = document.getElementById("average-words-journal")
+    let ctx_average_words_pages = document.getElementById("average-words-page")
+
+    let ctx_average_tags = document.getElementById("average-tags")
+
+
+    // count total words for dom
+    let total_words = 0
+    pages.forEach((page) => {
+        total_words += page.word_count
+    })
+
+    // count total journal/page entris
+    let journal_to_page_ratio = pages.filter((page) => page.journal_entry).length +"/"+ pages.filter((page) => !page.journal_entry).length
+    
+    // calculate average word per page for DOM
+    let average_words = total_words / pages.length
+
+    // calculate average words for journal/page entries only
+    let average_words_journal = 0; 
+    let average_words_pages = 0;
+    pages.forEach((page) => {
+        if (page.journal_entry) {
+            average_words_journal += page.word_count
+        } else {
+            average_words_pages += page.word_count
+        }
+    })
+    // divite total by pages marked as journal/page entry
+    average_words_journal = average_words_journal / pages.filter((page) => page.journal_entry).length
+    average_words_pages = average_words_pages / pages.filter((page) => !page.journal_entry).length
+
+
+
+    // calculate average tag per page
+    let average_tags_per_page = pages.reduce((a, b) => a + b.tag_count, 0) / pages.length
+
+    // Update DOM elements
+    ctx_pages_count.innerText = "total pages: "+ pages.length
+    ctx_journal_to_page_ratio.innerText = "└─ journal/page ratio: "+ journal_to_page_ratio
+
+    ctx_total_words.innerText = "total words: "+ total_words
+    ctx_average_words.innerText = "├─ average words per page: "+ average_words
+    ctx_average_words_journal.innerText = "├─ average words per journal entry: "+ average_words_journal.toFixed(2)
+    ctx_average_words_pages.innerText = "└─ average words per non-journal entry: "+ average_words_pages.toFixed(2)
+
+    ctx_average_tags.innerText = "Average tags per page: "+ average_tags_per_page.toFixed(2)
+}
+
 function draw_pages_dates(pages) {
     const ctx = document.getElementById("PageDates").getContext('2d');
     
