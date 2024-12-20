@@ -37,13 +37,12 @@ async function fetchdata() {
 
         // convert pages.journal_entry to boolean
         pages.forEach((page) => {
-            if (page.journal_entry == 1 ) {
+            if (page.journal_entry == 1) {
                 page.journal_entry = true;
             } else {
                 page.journal_entry = false;
             }
-        })
-
+        });
 
         // fetch files
         response = await fetch("/data/files");
@@ -54,12 +53,13 @@ async function fetchdata() {
         console.error("Error fetching the data:", e);
     }
 
+    show_basic_hashtags_stats(hashtags);
     draw_first_last_date_hashtag(hashtags);
     draw_hash_usage(hashtags);
     draw_hash_note_journal(hashtags);
 
-    show_basic_page_stats(pages)
-    draw_pages_dates(pages)
+    show_basic_page_stats(pages);
+    draw_pages_dates(pages);
 }
 
 // convert a string date to a date object
@@ -68,9 +68,54 @@ function str_to_date(date_str) {
     return new Date(Date.parse(date_str));
 }
 
+function format_date(date) {
+    let year = date.getFullYear();
+    let month = String(date.getMonth() + 1).padStart(2, "0");
+    let day = String(date.getDate()).padStart(2, "0");
+
+    return `${day}-${month}-${year}`;
+}
+
 ////////////////
 /// hashtags ///
 ////////////////
+
+function show_basic_hashtags_stats(hashtags) {
+    let ctx_hashtag_count = document.getElementById("hashtag-count");
+    let ctx_first_hashtag_date = document.getElementById("first-hashtag-date");
+    let ctx_last_hashtag_date = document.getElementById("last-hashtag-date");
+
+    // get first/last appearance date
+    let first_date = null;
+    let last_date = null;
+
+    hashtags.forEach((hashtag) => {
+        let first_appearance_date = hashtag.first_appearance_date;
+        let last_appearance_date = hashtag.last_appearance_date;
+
+        if (
+            first_appearance_date &&
+            !isNaN(first_appearance_date.getTime()) &&
+            (!first_date || first_appearance_date < first_date)
+        ) {
+            first_date = first_appearance_date;
+            console.log("new first date: ", first_date);
+        }
+        if (
+            last_appearance_date &&
+            !isNaN(last_appearance_date.getTime()) &&
+            (!last_date || last_appearance_date > last_date)
+        ) {
+            last_date = last_appearance_date;
+            console.log("new last date: ", last_date);
+        }
+    });
+
+    // Update DOM elements
+    ctx_hashtag_count.innerText = "total hashtags: " + hashtags.length;
+    ctx_first_hashtag_date.innerText = "first appearance: " + format_date(first_date);
+    ctx_last_hashtag_date.innerText = "last appearance: " + format_date(last_date);
+}
 
 // draw a chart showing the first and last appearance of an hashtag per month.
 function draw_first_last_date_hashtag(hashtags) {
@@ -145,11 +190,11 @@ function draw_first_last_date_hashtag(hashtags) {
         options: {
             plugins: {
                 tooltip: {
-                    mode: 'index',
-                    intersect: false
-                }
-            }
-        }
+                    mode: "index",
+                    intersect: false,
+                },
+            },
+        },
     });
 }
 
@@ -182,11 +227,11 @@ function draw_hash_usage(hashtags) {
         options: {
             plugins: {
                 tooltip: {
-                    mode: 'index',
-                    intersect: false
-                }
-            }
-        }
+                    mode: "index",
+                    intersect: false,
+                },
+            },
+        },
     });
 }
 
@@ -226,7 +271,6 @@ function draw_hash_note_journal(hashtags) {
 
     console.log(page_hashtag.length);
     console.log(journal_hashtag.length);
-    
 
     const labels_page = Array.from(page_hashtag).map((hashtag) => hashtag.name);
     const labels_journal = Array.from(journal_hashtag).map(
@@ -257,11 +301,11 @@ function draw_hash_note_journal(hashtags) {
         options: {
             plugins: {
                 tooltip: {
-                    mode: 'index',
-                    intersect: false
-                }
-            }
-        }
+                    mode: "index",
+                    intersect: false,
+                },
+            },
+        },
     });
     new Chart(ctx_journal, {
         type: "bar",
@@ -280,11 +324,11 @@ function draw_hash_note_journal(hashtags) {
         options: {
             plugins: {
                 tooltip: {
-                    mode: 'index',
-                    intersect: false
-                }
-            }
-        }
+                    mode: "index",
+                    intersect: false,
+                },
+            },
+        },
     });
 }
 
@@ -293,63 +337,78 @@ function draw_hash_note_journal(hashtags) {
 /////////////
 
 function show_basic_page_stats(pages) {
-    let ctx_pages_count = document.getElementById("page-count")
-    let ctx_journal_to_page_ratio = document.getElementById("journal-to-page-ratio")
-    let ctx_total_words = document.getElementById("total-words")
+    let ctx_pages_count = document.getElementById("page-count");
+    let ctx_journal_to_page_ratio = document.getElementById(
+        "journal-to-page-ratio"
+    );
+    let ctx_total_words = document.getElementById("total-words");
 
-    let ctx_average_words = document.getElementById("average-words")
-    let ctx_average_words_journal = document.getElementById("average-words-journal")
-    let ctx_average_words_pages = document.getElementById("average-words-page")
+    let ctx_average_words = document.getElementById("average-words");
+    let ctx_average_words_journal = document.getElementById(
+        "average-words-journal"
+    );
+    let ctx_average_words_pages = document.getElementById("average-words-page");
 
-    let ctx_average_tags = document.getElementById("average-tags")
-
+    let ctx_average_tags = document.getElementById("average-tags");
 
     // count total words for dom
-    let total_words = 0
+    let total_words = 0;
     pages.forEach((page) => {
-        total_words += page.word_count
-    })
+        total_words += page.word_count;
+    });
 
     // count total journal/page entris
-    let journal_to_page_ratio = pages.filter((page) => page.journal_entry).length +"/"+ pages.filter((page) => !page.journal_entry).length
-    
+    let journal_to_page_ratio =
+        pages.filter((page) => page.journal_entry).length +
+        "/" +
+        pages.filter((page) => !page.journal_entry).length;
+
     // calculate average word per page for DOM
-    let average_words = total_words / pages.length
+    let average_words = total_words / pages.length;
 
     // calculate average words for journal/page entries only
-    let average_words_journal = 0; 
+    let average_words_journal = 0;
     let average_words_pages = 0;
     pages.forEach((page) => {
         if (page.journal_entry) {
-            average_words_journal += page.word_count
+            average_words_journal += page.word_count;
         } else {
-            average_words_pages += page.word_count
+            average_words_pages += page.word_count;
         }
-    })
+    });
     // divite total by pages marked as journal/page entry
-    average_words_journal = average_words_journal / pages.filter((page) => page.journal_entry).length
-    average_words_pages = average_words_pages / pages.filter((page) => !page.journal_entry).length
-
-
+    average_words_journal =
+        average_words_journal /
+        pages.filter((page) => page.journal_entry).length;
+    average_words_pages =
+        average_words_pages /
+        pages.filter((page) => !page.journal_entry).length;
 
     // calculate average tag per page
-    let average_tags_per_page = pages.reduce((a, b) => a + b.tag_count, 0) / pages.length
+    let average_tags_per_page =
+        pages.reduce((a, b) => a + b.tag_count, 0) / pages.length;
 
     // Update DOM elements
-    ctx_pages_count.innerText = "total pages: "+ pages.length
-    ctx_journal_to_page_ratio.innerText = "└─ journal/page ratio: "+ journal_to_page_ratio
+    ctx_pages_count.innerText = "total pages: " + pages.length;
+    ctx_journal_to_page_ratio.innerText =
+        "└─ journal/page ratio: " + journal_to_page_ratio;
 
-    ctx_total_words.innerText = "total words: "+ total_words
-    ctx_average_words.innerText = "├─ average words per page: "+ average_words
-    ctx_average_words_journal.innerText = "├─ average words per journal entry: "+ average_words_journal.toFixed(2)
-    ctx_average_words_pages.innerText = "└─ average words per non-journal entry: "+ average_words_pages.toFixed(2)
+    ctx_total_words.innerText = "total words: " + total_words;
+    ctx_average_words.innerText = "├─ average words per page: " + average_words;
+    ctx_average_words_journal.innerText =
+        "├─ average words per journal entry: " +
+        average_words_journal.toFixed(2);
+    ctx_average_words_pages.innerText =
+        "└─ average words per non-journal entry: " +
+        average_words_pages.toFixed(2);
 
-    ctx_average_tags.innerText = "Average tags per page: "+ average_tags_per_page.toFixed(2)
+    ctx_average_tags.innerText =
+        "Average tags per page: " + average_tags_per_page.toFixed(2);
 }
 
 function draw_pages_dates(pages) {
-    const ctx = document.getElementById("PageDates").getContext('2d');
-    
+    const ctx = document.getElementById("PageDates").getContext("2d");
+
     const labels = [
         "January",
         "February",
@@ -386,16 +445,16 @@ function draw_pages_dates(pages) {
                     backgroundColor: "rgba(54, 162, 235, 0.2)",
                     borderColor: "rgba(54, 162, 235, 1)",
                     borderWidth: 1,
-                }
+                },
             ],
         },
         options: {
             plugins: {
                 tooltip: {
-                    mode: 'index',
-                    intersect: false
-                }
-            }
-        }
+                    mode: "index",
+                    intersect: false,
+                },
+            },
+        },
     });
 }
