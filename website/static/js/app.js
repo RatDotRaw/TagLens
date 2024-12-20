@@ -35,6 +35,16 @@ async function fetchdata() {
             page.date = str_to_date(page.date);
         });
 
+        // convert pages.journal_entry to boolean
+        pages.forEach((page) => {
+            if (page.journal_entry == 1 ) {
+                page.journal_entry = true;
+            } else {
+                page.journal_entry = false;
+            }
+        })
+
+
         // fetch files
         response = await fetch("/data/files");
         files = await response.json();
@@ -56,6 +66,10 @@ function str_to_date(date_str) {
     // example format of str date: 2024-08-13
     return new Date(Date.parse(date_str));
 }
+
+////////////////
+/// hashtags ///
+////////////////
 
 // draw a chart showing the first and last appearance of an hashtag per month.
 function draw_first_last_date_hashtag(hashtags) {
@@ -273,6 +287,9 @@ function draw_hash_note_journal(hashtags) {
     });
 }
 
+/////////////
+/// Pages ///
+/////////////
 function draw_pages_dates(pages) {
     const ctx = document.getElementById("PageDates").getContext('2d');
     
@@ -298,7 +315,7 @@ function draw_pages_dates(pages) {
         pages_dates[month]++;
     });
 
-    console.log(pages_dates); // Debugging output
+    // console.log(pages_dates); // Debugging output
 
     // Create the radar chart
     new Chart(ctx, {
