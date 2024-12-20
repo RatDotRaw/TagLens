@@ -24,6 +24,9 @@
 
 ## Configuration
 
+Before you can run the scripts, you'll need to set some environment variables.
+You can rename the included `example-env` to `.venv` and set all the variables there.
+
 ### Selection of Database
 
 > [!IMPORTANT]

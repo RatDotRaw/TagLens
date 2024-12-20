@@ -152,3 +152,4 @@ cython_debug/
 #.idea/
 app.db
 *.db
+*.sqlite
