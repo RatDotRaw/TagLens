@@ -487,3 +487,65 @@ function draw_pages_dates(pages) {
         },
     });
 }
+
+function draw_page_common_words(pages) {
+    // split all file names by spaces and count the occurrences of each word
+    let word_counts = {};
+    pages.forEach(page => {
+        if (page.journal_entry) { 
+            return; // Skip journal entries as they are not common words in page names.
+        }
+        let words = page.name.split(' ');
+        
+        words = words.map(word => word.replace(/\.md$/, '')) // remove .md extension
+        // words = words.map(word => word.replace(/^%.*? /, '')) // remove % and the next 2 characters
+
+        words = words.filter(word => word.length > 4); // Filter out short words
+        words = words.map(word => word.toLowerCase()); // Convert to lower case
+
+        // Count the occurrences of each word
+        for (let i = 0; i < words.length; i++) {
+            if (word_counts[words[i]]) {
+                word_counts[words[i]]++;
+            } else {
+                word_counts[words[i]] = 1;
+            }
+        }
+    })
+    // sort the word counts by frequency
+    console.log(word_counts)
+
+
+    // get the top x words
+    const top_words = Object.fromEntries(
+        Object.entries(word_counts)
+          .sort(([, a], [, b]) => b - a) // Sort by value descending
+          .slice(0, 10) // Take the top words
+      );
+    console.log('top words:', top_words);   
+    
+    // const chart = new Chart(document.getElementById("PageWords").getContext("2d"), {
+    //   type: "wordCloud",
+    //   data: {
+    //     labels: Object.keys(top_words),
+    //     datasets: [
+    //       {
+    //         label: "",
+    //         data: Object.values(top_words)
+    //       }
+    //     ]
+    //   },
+    //   options: {
+    //     title: {
+    //       display: false,
+    //       text: "Chart.js Word Cloud"
+    //     },
+    //     plugins: {
+    //       legend: {
+    //         display: false
+    //       }
+    //     }
+    //   }
+    // });
+}
+
