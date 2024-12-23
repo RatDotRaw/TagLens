@@ -60,6 +60,7 @@ async function fetchdata() {
 
     show_basic_page_stats(pages);
     draw_pages_dates(pages);
+    // draw_page_common_words(pages);
 }
 
 // convert a string date to a date object
@@ -99,7 +100,7 @@ function show_basic_hashtags_stats(hashtags) {
             (!first_date || first_appearance_date < first_date)
         ) {
             first_date = first_appearance_date;
-            console.log("new first date: ", first_date);
+            // console.log("new first date: ", first_date);
         }
         if (
             last_appearance_date &&
@@ -107,7 +108,7 @@ function show_basic_hashtags_stats(hashtags) {
             (!last_date || last_appearance_date > last_date)
         ) {
             last_date = last_appearance_date;
-            console.log("new last date: ", last_date);
+            // console.log("new last date: ", last_date);
         }
     });
 
@@ -269,8 +270,8 @@ function draw_hash_note_journal(hashtags) {
     page_hashtag.splice(25);
     journal_hashtag.splice(25);
 
-    console.log(page_hashtag.length);
-    console.log(journal_hashtag.length);
+    // console.log(page_hashtag.length);
+    // console.log(journal_hashtag.length);
 
     const labels_page = Array.from(page_hashtag).map((hashtag) => hashtag.name);
     const labels_journal = Array.from(journal_hashtag).map(
@@ -425,11 +426,27 @@ function draw_pages_dates(pages) {
     ];
 
     // Sort pages by month
-    let pages_dates = Array(12).fill(0); // Initialize counts for each month
-    pages.forEach((pages) => {
-        let month = pages.date.getMonth(); // 0-based index for months
-        pages_dates[month]++;
+    let total_dates = Array(12).fill(0); // Initialize counts for each month
+    let journal_dates = Array(12).fill(0);
+    let pages_dates = Array(12).fill(0); 
+    pages.forEach((page) => {
+        let month = page.date.getMonth(); // 0-based index for months
+        total_dates[month]++;
+
+        // add to journal dates if it is a journal entry
+        if (page.journal_entry) {
+            journal_dates[month]++;
+        } else {
+            pages_dates[month]++;
+        }
     });
+
+    console.log(total_dates); // Debugging output
+    console.log(journal_dates); // Debugging output
+    console.log(pages_dates); // Debugging output
+
+    // Sort journal entries by month
+    
 
     // console.log(pages_dates); // Debugging output
 
@@ -440,8 +457,20 @@ function draw_pages_dates(pages) {
             labels: labels, // Month labels
             datasets: [
                 {
-                    label: "Page creation date",
+                    label: "Journal entries",
+                    data: journal_dates, // Data for each month
+                    backgroundColor: "rgba(255, 99, 132, 0.2)",
+                    borderColor: "rgba(255, 99, 132, 1)",
+                },
+                {
+                    label: "Pages entries",
                     data: pages_dates, // Data for each month
+                    backgroundColor: "rgba(75, 192, 192, 0.2)",
+                    borderColor: "rgba(75, 192, 192, 1)",
+                },
+                {
+                    label: "total creation date",
+                    data: total_dates, // Data for each month
                     backgroundColor: "rgba(54, 162, 235, 0.2)",
                     borderColor: "rgba(54, 162, 235, 1)",
                     borderWidth: 1,

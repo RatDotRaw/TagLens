@@ -9,6 +9,10 @@ body {
     /* height: 100vh; */
 }
 
+p {
+    max-width: 600px;
+}
+
 /* .sideBySide {
     width: 80%;
     display: flex;
