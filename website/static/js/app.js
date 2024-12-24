@@ -291,7 +291,7 @@ function draw_hash_note_journal(hashtags) {
             labels: labels_page,
             datasets: [
                 {
-                    label: "# of Mentions in page entries",
+                    label: "# of Mentions in note entries",
                     data: page_data,
                     backgroundColor: "rgba(255, 99, 132, 0.2)",
                     borderColor: "rgba(255, 99, 132, 1)",

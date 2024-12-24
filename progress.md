@@ -32,7 +32,10 @@ Why is info of page content gathered? it might give more context to each tag. Wh
 
 ### Tags
 
-Why gather info of tags? In my ~~final projecta application, I am going to make a tagging application.~~ For a better user experience i want to have a solid choise of pre made tags. Another reason, There are going to be tags with extra functionality, like a tag that triggers a reminder. I hope to find more use cases and insights by gathering info. another personal reason is that I want to have a better understanding of my own tagging habits, what tags I use most, which one is too granular or nieche and so on... ~~to maybe in the future clean up a bit.~~ <-- (lying to myself)
+Why gather info of tags? In my ~~final projecta application, I am going to make a tagging application. For a better user experience i want to have a solid choise of pre made tags. Another reason, There are going to be tags with extra functionality, like a tag that triggers a reminder. I hope to find more use cases and insights by gathering info.~~ To find
+
+
+another personal reason is that I want to have a better understanding of my own tagging habits, what tags I use most, which one is too granular or nieche and so on... ~~to maybe in the future clean up a bit.~~ <-- (lying to myself)
 
 - [x] Tag name
 - [x] Total count of tag

@@ -15,15 +15,35 @@
     <body>
         <h1>Logseq knowledge base analysis</h1>
         <p>
-            This project is generalized. You'll have to supply your own Logseq
-            knowledge base and make your own conclusions.
+            This project is generalized. You'll have to supply your own Logseq.
+        </p>
+        <p>
+            The goal of this visualization is to help you understand your own
+            knowledge base and find new ways of separating and organize your
+            knowledge base. By trying to give a birds eye view combined with
+            your fine knowledge of whats inside Logseq, you might find new ways
+            of achieving this. This can be done by looking for broader hashtags
+            you could use for separating your knowledge base or drawing a line
+            in your pages and splitting it into smaller graphs. (or both)
+        </p>
+        <p>
+            Later, you'll have the chance to make notes. Its important to write
+            your reasoning down as wel. This later comes in handy when you're
+            validating them to see whats important to you and whats not.
         </p>
         <p>
             Know yourself and go scout in your logseq files. A lot of insights
-            can be found by getting your hands dirty by exploring and comparing
+            can be found by getting your hands dirty and by exploring and comparing
             the visual data with your logseq entries. It is important to take
             your time and jump back and forward in your logseq files and notes
             you'll be making.
+        </p>
+        <p>
+            as a quick side note; I'll be refering to 2 different pages types,
+            journal and notes. when I talk about journal, I'm talking about
+            pages from your journal in logseq (with a date in the title). when I talk about
+            notes, I'm talking about pages without a date (everything except
+            journal pages).
         </p>
         <h2>Hashtags-level analysis</h2>
         <div class="left-liner">
@@ -38,10 +58,10 @@
                 words.
             </p>
         </div>
-        <h3>Hashtag longevity</h3>
+        <h3>Hashtag longegevity</h3>
         <p>
             If you have a big Logseq knowledge base, there are hashtags that are
-            bound to be forgotten.
+            bound to be forgotten or only used once.
         </p>
         <p>lets first analyse the hashtag use troughout the year.</p>
         <div class="chart-container">
@@ -50,7 +70,7 @@
         <p>
             now, you you see any spikes in the graph? an influx of new hashtags
             or a sudden drop in usage? That could be a sign of something
-            interesting happening.
+            interesting happening. Go look in Logseq around those dates.
         </p>
         <textarea
             class="notes"
@@ -67,7 +87,7 @@
             journal entry
         </p>
         <p>
-            A quick note: if an entry is in both a note and a journal entry, it
+            A quick note: if an entry is in both in a note and a journal entry, it
             will be sorted as a journal entry.
         </p>
         <p>
@@ -80,9 +100,14 @@
             <canvas id="HashJournal"></canvas>
         </div>
         <p>
-            now, what are the most used hashtags? What might be the relation
-            between the most used one and their presence in notes and journal
-            entries? What are the categories a hashtag might belong to?
+            Now there is a clear division between your notes and personal life
+            (journal). Take a good look at all those hashtags. It's clear that
+            you use different hashtags in your journal entries than in your
+            pages. now, what are the most used hashtags? They probably have
+            somthing to do with an activity you do often. What might be the
+            relation between the most used one and their presence in notes and
+            journal entries? What are broader or overachting themes a hashtag
+            might belong to? Make a little list of those.
         </p>
         <textarea
             class="notes"
@@ -105,10 +130,6 @@
             <p id="average-words-page"></p>
 
             <p id="average-tags"></p>
-            <p>
-                TODO: do the same sub categories for hashtags as we did for
-                words.
-            </p>
         </div>
 
         <p>
