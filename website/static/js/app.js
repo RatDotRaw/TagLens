@@ -446,11 +446,6 @@ function draw_pages_dates(pages) {
     // console.log(journal_dates); // Debugging output
     // console.log(pages_dates); // Debugging output
 
-    // Sort journal entries by month
-    
-
-    // console.log(pages_dates); // Debugging output
-
     // Create the radar chart
     new Chart(ctx, {
         type: "line",
@@ -486,6 +481,76 @@ function draw_pages_dates(pages) {
                 },
             },
         },
+    });
+}
+ 
+function draw_page_sentiment(pages) {
+    let ctx = document.getElementById("PageSentiment")
+
+    // get all sentiment labels and count occurances per page
+    let sentiment_labels = {};
+    pages.forEach(page => {
+        const sentiment = page.sentiment_tags
+        if (!sentiment) return // skip empty ones
+        sentiment.forEach(sentiment => {
+            let label = sentiment.label;
+            if (sentiment_labels[label]) {
+                sentiment_labels[label]++;
+            } else {
+                sentiment_labels[label] = 1;
+            }
+        })
+    })
+
+    // split into smaller dictionaries
+    sentiment_labels = Object.entries(sentiment_labels).flatMap(([key, count]) => ({ [key]: count }));
+    // sort by descending
+    sentiment_labels.sort((a, b) => b - a);
+
+    // hide less frequent labels to reduce clutter
+    // count total entries
+    let total_value = sentiment_labels.reduce((sum, entry) => sum + Object.values(entry)[0], 0);
+    // Combine entries with less than 10% of the total into "other"
+    let threshold = total_value * 0.05;
+    let combined_labels = [];
+    let other_value = 0;
+
+    sentiment_labels.forEach(entry => {
+        let value = Object.values(entry)[0];
+        if (value < threshold) {
+            other_value += value;
+        } else {
+            combined_labels.push(entry);
+        }
+    });
+
+    if (other_value > 0) {
+        combined_labels.push({ "other": other_value });
+    }
+
+    // get labels and values for chart
+    let labels = combined_labels.map(item => Object.keys(item)[0]);
+    let values = combined_labels.map(item => Object.values(item)[0]);
+    
+    new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: labels, 
+            datasets: [
+                {
+                    label: "Journal sentiment",
+                    data: values,
+                },
+            ],
+        },
+        // options: {
+        //     plugins: {
+        //         tooltip: {
+        //             mode: "index",
+        //             intersect: false,
+        //         },
+        //     },
+        // },
     });
 }
 
