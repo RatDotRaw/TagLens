@@ -60,6 +60,7 @@ async function fetchdata() {
 
     show_basic_page_stats(pages);
     draw_pages_dates(pages);
+    draw_page_sentiment(pages);
     // draw_page_common_words(pages);
 }
 
@@ -441,9 +442,9 @@ function draw_pages_dates(pages) {
         }
     });
 
-    console.log(total_dates); // Debugging output
-    console.log(journal_dates); // Debugging output
-    console.log(pages_dates); // Debugging output
+    // console.log(total_dates); // Debugging output
+    // console.log(journal_dates); // Debugging output
+    // console.log(pages_dates); // Debugging output
 
     // Sort journal entries by month
     
