@@ -1,3 +1,4 @@
+import json
 from typing import List
 from typing import Optional
 from sqlalchemy import String
@@ -59,13 +60,21 @@ class Page(Base):
     file = relationship('File', back_populates='page')
 
     def to_dict(self):
+        sentiment_tags = None
+        
+        if self.sentiment_tags:
+            try:
+                sentiment_tags = json.loads(self.sentiment_tags)
+            except json.JSONDecodeError:
+                print("Failed to decode JSON from sentiment_tags")
+
         return {
             'id': self.id,
             'name': self.name,
             'file_name': self.file_name,
             'tag_count': self.tag_count,
             'word_count': self.word_count,
-            'sentiment_tags': self.sentiment_tags,
+            'sentiment_tags': sentiment_tags,
             'category': self.category,
             'journal_entry': self.journal_entry,
             'date': self.date
