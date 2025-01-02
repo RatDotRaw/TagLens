@@ -2,6 +2,22 @@ console.log("app.js loaded");
 
 document.addEventListener("DOMContentLoaded", fetchdata);
 
+// Define the month labels
+const labels_months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+];
+
 async function fetchdata() {
     let files = [];
     let hashtags = [];
@@ -123,21 +139,7 @@ function show_basic_hashtags_stats(hashtags) {
 function draw_first_last_date_hashtag(hashtags) {
     // Get the canvas context
     const ctx = document.getElementById("HashDateLine").getContext("2d");
-    // Define the month labels
-    const labels = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-    ];
+
 
     // Count hashtag usage by month
     let first_appearance_date_counts = Array(12).fill(0); // Initialize counts for each month
@@ -163,7 +165,7 @@ function draw_first_last_date_hashtag(hashtags) {
     new Chart(ctx, {
         type: "line",
         data: {
-            labels: labels, // Month labels
+            labels: labels_months, // Month labels
             datasets: [
                 {
                     label: "Hashtag First Appearance",
@@ -411,21 +413,6 @@ function show_basic_page_stats(pages) {
 function draw_pages_dates(pages) {
     const ctx = document.getElementById("PageDates").getContext("2d");
 
-    const labels = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-    ];
-
     // Sort pages by month
     let total_dates = Array(12).fill(0); // Initialize counts for each month
     let journal_dates = Array(12).fill(0);
@@ -450,7 +437,7 @@ function draw_pages_dates(pages) {
     new Chart(ctx, {
         type: "line",
         data: {
-            labels: labels, // Month labels
+            labels: labels_months, // Month labels
             datasets: [
                 {
                     label: "Journal entries",
@@ -511,7 +498,7 @@ function draw_page_sentiment(pages) {
     // count total entries
     let total_value = sentiment_labels.reduce((sum, entry) => sum + Object.values(entry)[0], 0);
     // Combine entries with less than 10% of the total into "other"
-    let threshold = total_value * 0.05;
+    let threshold = total_value * 0.025;
     let combined_labels = [];
     let other_value = 0;
 
