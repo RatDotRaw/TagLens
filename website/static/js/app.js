@@ -70,7 +70,7 @@ async function fetchdata() {
     }
 
     show_basic_hashtags_stats(hashtags);
-    draw_first_last_date_hashtag(hashtags);
+    draw_hashtag_longegevity(hashtags);
     draw_hash_usage(hashtags);
     draw_hash_note_journal(hashtags);
 
@@ -136,7 +136,7 @@ function show_basic_hashtags_stats(hashtags) {
 }
 
 // draw a chart showing the first and last appearance of an hashtag per month.
-function draw_first_last_date_hashtag(hashtags) {
+function draw_hashtag_longegevity(hashtags) {
     // Get the canvas context
     const ctx = document.getElementById("HashDateLine").getContext("2d");
 
