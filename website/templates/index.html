@@ -29,21 +29,22 @@
         <p>
             Later, you'll have the chance to make notes. Its important to write
             your reasoning down as wel. This later comes in handy when you're
-            validating them to see whats important to you and whats not.
+            validating them to see whats important to you and whats not. You get
+            a lot of aera to type in, maybe use it for once.
         </p>
         <p>
             Know yourself and go scout in your logseq files. A lot of insights
-            can be found by getting your hands dirty and by exploring and comparing
-            the visual data with your logseq entries. It is important to take
-            your time and jump back and forward in your logseq files and notes
-            you'll be making.
+            can be found by getting your hands dirty and by exploring and
+            comparing the visual data with your logseq entries. It is important
+            to take your time and jump back and forward in your logseq files and
+            notes you'll be making.
         </p>
         <p>
             as a quick side note; I'll be refering to 2 different pages types,
             journal and notes. when I talk about journal, I'm talking about
-            pages from your journal in logseq (with a date in the title). when I talk about
-            notes, I'm talking about pages without a date (everything except
-            journal pages).
+            pages from your journal in logseq (with a date in the title). when I
+            talk about notes, I'm talking about pages without a date (everything
+            except journal pages).
         </p>
         <h2>Hashtags-level analysis</h2>
         <div class="left-liner">
@@ -73,6 +74,7 @@
             interesting happening. Go look in Logseq around those dates.
         </p>
         <textarea
+            id="n-h-longegevity"
             class="notes"
             placeholder="Notes you want to make..."
         ></textarea>
@@ -87,8 +89,8 @@
             journal entry
         </p>
         <p>
-            A quick note: if an entry is in both in a note and a journal entry, it
-            will be sorted as a journal entry.
+            A quick note: if an entry is in both in a note and a journal entry,
+            it will be sorted as a journal entry.
         </p>
         <p>
             Now, let's see how the top hashtags are used in notes and journal
@@ -110,16 +112,20 @@
             might belong to? Make a little list of those.
         </p>
         <textarea
+            id="n-h-uses-months"
             class="notes"
             placeholder="Notes you want to make..."
         ></textarea>
-        <hr class="dashed" />
+        <hr />
         <h2>Page-level analysis</h2>
         <p>
             Pages are a little less interesting to look at, but still could give
             some context and insights for the hashtags.
         </p>
-        <p>Lets first take a peak at some broad statistics.</p>
+        <p>
+            Lets first take a peak at some broad statistics. Might come in handy
+            later.
+        </p>
         <div class="left-liner">
             <p id="page-count"></p>
             <p id="journal-to-page-ratio"></p>
@@ -130,6 +136,9 @@
             <p id="average-words-page"></p>
 
             <p id="average-tags"></p>
+        </div>
+        <div class="small-chart-container">
+            <canvas id="PageSentiment"></canvas>
         </div>
 
         <p>
@@ -146,20 +155,16 @@
             new hashtags, and these hashtags will be used in the future.
         </p>
         <p>
-            Take notes! Why is there an influx or a dip, did something happen
-            around that time, what was it related to? why are there more journal
-            entries than new pages, where you focussed on something? Go ahead
-            and snuff in jour Logseq pages.
+            Take notes! Why is there an influx or a dip, what happened around
+            that time that explain why so many new notes, what was it related to?
+            why are there more journal entries than new pages, where you
+            focussed on something? Go ahead and snuff in jour Logseq pages.
         </p>
         <textarea
+            id="n-h-uses-split"
             class="notes"
             placeholder="Notes you want to make..."
         ></textarea>
-
-        <div class="chart-container">
-            <canvas id="PageSentiment"></canvas>
-        </div>
-
         <!-- <div class="chart-container">
             <canvas id="PageWords"></canvas>
         </div> -->

@@ -26,9 +26,20 @@ p {
   margin: 0;
 }
 
+.note-view {
+  padding: 1rem;
+  margin: 0.5rem;
+  border: 2px solid #000;
+  border-radius: 3px;
+}
+
 .chart-container {
     width: 80%;
     max-width: 800px;
+}
+.small-chart-container {
+  width: 35%;
+  max-width: 300px;
 }
 
 /* textarea notes class makeup */
