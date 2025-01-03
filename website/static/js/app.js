@@ -78,6 +78,8 @@ async function fetchdata() {
     draw_pages_dates(pages);
     draw_page_sentiment(pages);
     // draw_page_common_words(pages);
+
+    draw_longevity_difference(hashtags, pages)
 }
 
 // convert a string date to a date object

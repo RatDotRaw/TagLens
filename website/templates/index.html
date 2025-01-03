@@ -156,8 +156,6 @@
         </p>
         <p>
             Take notes! Why is there an influx or a dip, what happened around
-            that time that explain why so many new notes, what was it related to?
-            why are there more journal entries than new pages, where you
             that time that explain why so many new notes, what was it related
             to? why are there more journal entries than new pages, where you
             focussed on something? Go ahead and snuff in jour Logseq pages.
@@ -187,8 +185,50 @@
             <canvas id="mix_longevity"></canvas>
         </div>
 
+        <hr />
+        <h2>The conclusion</h2>
+        <p>
+            You have taken a broad look and took a closer look in your logseq
+            files where needed. Its about time we looked at the notes you have
+            taken troughout.
+        </p>
+        <!-- this button is here so people click out of the textarea so the js can do its thing -->
+        <button id="Compile-notes">Compile my notes!</button>
+        <p>
+            Beatifull notes as they are, but they're not perfect. Lets rewrite
+            them to make them more contextually relevant.
+            <b>TL;DR: lets make a proper summary of your insights.</b> This will
+            help you remember what you were thinking when you wrote it, and also
+            help others understand your thoughts better.
+        </p>
+        <p>Or just copy you're notes.</p>
+        <p>Now, here are the notes you took:</p>
+        <div class="left-liner">
+            <p id="note-view1" class="note-view">
+                You didn't take any notes here...
+            </p>
+            <p id="note-view2" class="note-view">
+                You didn't take any notes here...
+            </p>
+            <p id="note-view3" class="note-view">
+                You didn't take any notes here...
+            </p>
+        </div>
+        <p>
+            Althoug there is no text area provided for you, you can still type
+            them down in a text editor like Word or Notepad++.
+        </p>
+        <!-- <p>How to organize your document?</p>
+        <p>
+            First, start with an short indroduction to what this is about.
+            Next, make a litle list of your key 
+        </p> -->
         <script
             src="{{ url_for('static', filename='js/app.js') }}"
+            defer
+        ></script>
+        <script
+            src="{{ url_for('static', filename='js/notes.js') }}"
             defer
         ></script>
     </body>
