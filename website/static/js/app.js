@@ -602,3 +602,86 @@ function draw_page_common_words(pages) {
     // });
 }
 
+/////////////
+/// mixed ///
+/////////////
+
+function draw_longevity_difference(hashtags, pages) {
+    const ctx = document.getElementById("mix_longevity")
+
+    // Count hashtag usage by month
+    let first_appearance_date = Array(12).fill(0); // Initialize counts for each month
+    hashtags.forEach((hashtag) => {
+        let month = hashtag.first_appearance_date.getMonth(); // 0-based index for months
+        first_appearance_date[month]++;
+    });
+    let last_appearance_date = Array(12).fill(0);
+    hashtags.forEach((hashtag) => {
+        let month = hashtag.last_appearance_date.getMonth(); // 0-based index for months
+        last_appearance_date[month]++;
+    });
+
+    // count new pages per month
+    let total_dates = Array(12).fill(0);
+    pages.forEach((page) => {
+        let month = page.date.getMonth(); // 0-based index for months
+        total_dates[month]++;
+    });
+
+    // remove hashtag counts per moth (hashtag - pages)
+    for (let i = 0; i < 12; i++) {
+        first_appearance_date[i] -= total_dates[i];
+        last_appearance_date[i] -= total_dates[i];
+    }
+
+    let monthly_difference = [];
+    for (let i = 0; i < 12; i++) {
+        monthly_difference.push(
+            first_appearance_date[i] - last_appearance_date[i]
+        );
+    }
+
+    // draw chart
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels_months, // Month labels
+            datasets: [
+                {
+                    label: "Hashtag First Appearance",
+                    data: first_appearance_date, // Data for each month
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1,
+                },
+                {
+                    label: "Hashtag Last Appearance",
+                    data: last_appearance_date, // Data for each month
+                    backgroundColor: "rgba(255, 99, 132, 0.2)",
+                    borderColor: "rgba(255, 99, 132, 1)",
+                    borderWidth: 1,
+                },
+                {
+                    label: "Difference",
+                    data: monthly_difference, // Data for each month
+                    backgroundColor: "rgba(75, 192, 192, 0.2)",
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    borderWidth: 1,
+                    fill: true,
+                },
+            ],
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Normalized hashtag count'
+                },
+                tooltip: {
+                    mode: "index",
+                    intersect: false,
+                },
+            },
+        },
+    });
+}

@@ -158,6 +158,8 @@
             Take notes! Why is there an influx or a dip, what happened around
             that time that explain why so many new notes, what was it related to?
             why are there more journal entries than new pages, where you
+            that time that explain why so many new notes, what was it related
+            to? why are there more journal entries than new pages, where you
             focussed on something? Go ahead and snuff in jour Logseq pages.
         </p>
         <textarea
@@ -168,6 +170,22 @@
         <!-- <div class="chart-container">
             <canvas id="PageWords"></canvas>
         </div> -->
+        <hr />
+        <h2>Mixed analysis</h2>
+        <p>
+            So far we have looked at pages and hashtags seperately, now, lets
+            overlay some of the data we have collected.
+        </p>
+        <p>
+            Lets take a look at the hashtag amount minus the created pages. this
+            should end in a normalized & flat curve. assuming the hastag per
+            page stay's constant, means that if there's a spike, a page or few
+            pages have something going on. Go in the logseq files and see what
+            happened.
+        </p>
+        <div class="chart-container">
+            <canvas id="mix_longevity"></canvas>
+        </div>
 
         <script
             src="{{ url_for('static', filename='js/app.js') }}"
