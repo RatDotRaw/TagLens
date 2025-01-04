@@ -87,6 +87,8 @@ To run the scraper, use the following command: `python scraper.py`
 
 To run the webui, use the following command: `python webui.py`
 
+The webui will not open automatically, instead it will print out a URL in the terminal.
+You can then open this URL in your browser to access the webui.
 
 ## Progress
 
