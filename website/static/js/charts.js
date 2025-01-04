@@ -80,6 +80,7 @@ async function fetchdata() {
     // draw_page_common_words(pages);
 
     draw_longevity_difference(hashtags, pages)
+    sentiment_evolution(pages);
 }
 
 // convert a string date to a date object
@@ -687,3 +688,5 @@ function draw_longevity_difference(hashtags, pages) {
         },
     });
 }
+
+

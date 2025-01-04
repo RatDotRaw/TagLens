@@ -10,7 +10,14 @@
         />
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src=" https://cdn.jsdelivr.net/npm/chartjs-chart-wordcloud"></script>
-        <!-- <script src="{{ url_for('static', filename='js/chart.js') }}"></script> -->
+        <script
+            src="{{ url_for('static', filename='js/charts.js') }}"
+            defer
+        ></script>
+        <script
+            src="{{ url_for('static', filename='js/notes.js') }}"
+            defer
+        ></script>
     </head>
     <body>
         <h1>Logseq knowledge base analysis</h1>
@@ -223,13 +230,5 @@
             First, start with an short indroduction to what this is about.
             Next, make a litle list of your key 
         </p> -->
-        <script
-            src="{{ url_for('static', filename='js/app.js') }}"
-            defer
-        ></script>
-        <script
-            src="{{ url_for('static', filename='js/notes.js') }}"
-            defer
-        ></script>
     </body>
 </html>
