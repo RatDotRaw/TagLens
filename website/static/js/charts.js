@@ -690,3 +690,56 @@ function draw_longevity_difference(hashtags, pages) {
 }
 
 
+function sentiment_evolution(pages) {
+    const ctx = document.getElementById("sentiment_evolution");
+
+    let sentiment_counts = {};
+
+    // count occurrences of each sentiment label (and month)
+    pages.forEach(page => {
+        if (!page.sentiment_tags) return;
+
+        page.sentiment_tags.forEach(sentiment => {
+            let label = sentiment.label;
+            if (!sentiment_counts[label]) {
+                sentiment_counts[label] = Array(12).fill(0); // Initialize array for months
+            }
+            let month = new Date(page.date).getMonth();
+            sentiment_counts[label][month]++; // Increment the count for that month
+        });
+    });
+
+    // extract the top 5 most used sentiment labels
+    const top5_labels = Object.entries(sentiment_counts)
+        .sort(([, a], [, b]) => b.reduce((x, y) => x + y, 0) - a.reduce((x, y) => x + y, 0)) // Sort by total occurrences
+        .slice(0, 5) // Take top 5
+        .map(([label, _]) => label);
+
+    console.log("Top 5 Sentiments:", top5_labels);
+
+    // prepare datasets for Chart.js
+    const datasets = top5_labels.map(label => ({
+        label: label,
+        data: sentiment_counts[label], // Monthly counts for that sentiment
+    }));
+
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels_months,
+            datasets: datasets
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Normalized hashtag count'
+                },
+                tooltip: {
+                    mode: "index",
+                    intersect: false,
+                },
+            },
+        },
+    });
+}

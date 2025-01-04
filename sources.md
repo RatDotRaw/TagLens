@@ -13,6 +13,7 @@ https://docs.sqlalchemy.org/en/20/orm/quickstart.html
 https://chatgpt.com/share/6756f255-0078-8012-a663-2b0cfb271dc4
 https://www.geeksforgeeks.org/chart-js-chart-types/
 https://www.sgratzl.com/chartjs-chart-wordcloud/examples/#word-cloud
+https://chatgpt.com/share/67784488-b1f8-8012-959f-1e4f7a48dd5c
 
 Bee Movie Script: https://gist.github.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a
 
