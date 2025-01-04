@@ -69,13 +69,13 @@ async function fetchdata() {
         console.error("Error fetching the data:", e);
     }
 
-    show_basic_hashtags_stats(hashtags);
+    show_general_hashtags_stats(hashtags);
     draw_hashtag_longegevity(hashtags);
     draw_hash_usage(hashtags);
     draw_hash_note_journal(hashtags);
 
     show_basic_page_stats(pages);
-    draw_pages_dates(pages);
+    draw_pages_evolution(pages);
     draw_page_sentiment(pages);
     // draw_page_common_words(pages);
 
@@ -101,7 +101,7 @@ function format_date(date) {
 /// hashtags ///
 ////////////////
 
-function show_basic_hashtags_stats(hashtags) {
+function show_general_hashtags_stats(hashtags) {
     let ctx_hashtag_count = document.getElementById("hashtag-count");
     let ctx_first_hashtag_date = document.getElementById("first-hashtag-date");
     let ctx_last_hashtag_date = document.getElementById("last-hashtag-date");
@@ -413,7 +413,7 @@ function show_basic_page_stats(pages) {
         "Average tags per page: " + average_tags_per_page.toFixed(2);
 }
 
-function draw_pages_dates(pages) {
+function draw_pages_evolution(pages) {
     const ctx = document.getElementById("PageDates").getContext("2d");
 
     // Sort pages by month
