@@ -8,7 +8,7 @@ from classes.Page import Page
 import logging
 from database.DatabaseFactory import DatabaseFactory
 
-logseq_base_path = "/home/stafd/Documents/git/logseq"
+logseq_base_path = os.getenv("LOGSEQ_BASE_PATH")
 
 logging.getLogger().setLevel(logging.INFO)
 

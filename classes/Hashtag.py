@@ -1,7 +1,7 @@
 from classes.File import File
 import tools.crawler as crawler
 
-import datetime
+from datetime import datetime
 from typing import Set
 
 
@@ -20,21 +20,29 @@ class Hashtag:
         self.count = 1
         self.sources: Set[File] = set()
 
-        self.first_appearance_date: datetime.datetime = None
-        self.last_appearance_date: datetime.datetime = None
+        self.first_appearance_date: datetime = None
+        self.last_appearance_date: datetime = None
 
         self.add_source(source)
 
     def __hash__(self):
         return hash(self.name)  # Use name for hashing
 
+    # TODO: Bug: The first and last dates are not correct in my testing. problem lies likely somewhere else... (if i only wrote tests...)
     def add_source(self, source: File):
         date = crawler.get_page_date(source.name)
+
+        # Check if the source already exists
+        for s in self.sources:
+            if s.name == source.name:
+                return  # Source already exists
+
         if date:
-            # check if the date is newer than the current first appearance or older than the last appearance
+            # Update first_appearance_date
             if self.first_appearance_date is None or date < self.first_appearance_date:
                 self.first_appearance_date = date
 
+            # Update last_appearance_date
             if self.last_appearance_date is None or date > self.last_appearance_date:
                 self.last_appearance_date = date
 

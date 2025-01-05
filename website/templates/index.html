@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Data Visualization</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/style.css') }}"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src=" https://cdn.jsdelivr.net/npm/chartjs-chart-wordcloud"></script>
+        <script
+            src="{{ url_for('static', filename='js/charts.js') }}"
+            defer
+        ></script>
+        <script
+            src="{{ url_for('static', filename='js/notes.js') }}"
+            defer
+        ></script>
+    </head>
+    <body>
+        <h1>Logseq knowledge base analysis</h1>
+        <p>
+            This project is generalized. You'll have to supply your own Logseq.
+        </p>
+        <p>
+            The goal of this visualization is to help you understand your own
+            knowledge base and find new ways of separating and organizing your
+            knowledge base. By trying to give a bird's-eye view combined with
+            your fine knowledge of what's inside Logseq, you might find new ways
+            of achieving this. This can be done by
+            <b>
+                searching for broader or overarching hashtags that encapsulate a
+                bigger topic or theme
+            </b>
+            , or finding clear points where you can separating your knowledge
+            base into multiple smaller graphs. (or both)
+        </p>
+        <p>
+            Later, you'll have the chance to make notes. It's important to write
+            your reasoning down as well. This later comes in handy when you're
+            validating them to see what's important to you and what's not. You
+            get a lot of area to type in, maybe use it for once.
+        </p>
+        <p>
+            Know yourself and go scout in your Logseq files. A lot of insights
+            can be found by getting your hands dirty and by exploring and
+            comparing the visual data with your Logseq entries. It is important
+            to take your time and jump back and forth in your Logseq files and
+            notes you'll be making.
+        </p>
+        <p>
+            As a quick side note; I'll be referring to 2 different page types,
+            journal and notes. When I talk about journal, I'm talking about
+            pages from your journal in Logseq (with a date in the title). When I
+            talk about notes, I'm talking about pages without a date (everything
+            except journal pages).
+        </p>
+        <h2>Hashtags-level analysis</h2>
+        <div class="left-liner">
+            <p id="hashtag-count"></p>
+            <p id="first-hashtag-date"></p>
+            <p id="last-hashtag-date"></p>
+            <p id="average-hashtag-page"></p>
+
+            <p id="average-tags"></p>
+            <p>
+                TODO: do the same sub categories for hashtags as we did for
+                words.
+            </p>
+        </div>
+        <h3>Hashtag Longevity</h3>
+        <p>
+            If you have a big Logseq knowledge base, there are hashtags that are
+            bound to be forgotten or only used once.
+        </p>
+        <p>Let's first analyze the hashtag usage throughout the year.</p>
+        <div class="chart-container">
+            <canvas id="HashDateLine"></canvas>
+        </div>
+        <p>
+            Now, do you see any spikes in the graph? An influx of new hashtags
+            or a sudden drop in usage? That could be a sign of something
+            interesting happening. Go look in Logseq around those dates.
+        </p>
+        <textarea
+            id="n-h-longegevity"
+            class="notes"
+            placeholder="Notes you want to make..."
+        ></textarea>
+        <hr class="dashed" />
+        <p>Now, what are the most used hashtags?</p>
+        <p>
+            Let's first start off by looking at the most used hashtags overall.
+        </p>
+        <div class="chart-container">
+            <canvas id="HashUse"></canvas>
+        </div>
+        <p>
+            Not much insight here... Let's split the hashtags by note and
+            journal entry.
+        </p>
+        <p>
+            A quick note: If an entry is in both a note and a journal entry, it
+            will be sorted as a journal entry.
+        </p>
+        <p>
+            Now, let's see how the top hashtags are used in notes and journal
+            entries separately.
+        </p>
+
+        <div class="chart-container sideBySide">
+            <canvas id="HashPage"></canvas>
+            <canvas id="HashJournal"></canvas>
+        </div>
+        <p>
+            Now there is a clear division between your notes and personal life
+            (journal). Take a good look at all those hashtags. It's clear that
+            you use different hashtags in your journal entries than in your
+            pages. Now, what are the most used hashtags? They probably have
+            something to do with an activity you do often. What might be the
+            relation between the most used ones and their presence in notes and
+            journal entries? What are broader or overarching themes a hashtag
+            might belong to? Make a little list of those.
+        </p>
+        <textarea
+            id="n-h-uses-months"
+            class="notes"
+            placeholder="Notes you want to make..."
+        ></textarea>
+        <hr />
+        <h2>Page-Level Analysis</h2>
+        <p>
+            Pages are a little less interesting to look at, but still could
+            provide some context and insights for the hashtags.
+        </p>
+        <p>
+            Let's first take a peek at some broad statistics. Might come in
+            handy later.
+        </p>
+        <div class="left-liner">
+            <p id="page-count"></p>
+            <p id="journal-to-page-ratio"></p>
+
+            <p id="total-words"></p>
+            <p id="average-words"></p>
+            <p id="average-words-journal"></p>
+            <p id="average-words-page"></p>
+
+            <p id="average-tags"></p>
+        </div>
+        <div class="small-chart-container">
+            <canvas id="PageSentiment"></canvas>
+        </div>
+
+        <p>
+            Let's take a dive into the Logseq pages, and see what we can learn
+            from them.
+        </p>
+        <div class="chart-container">
+            <canvas id="PageDates"></canvas>
+        </div>
+        <p>
+            I bet this chart may look very familiar to you. It is common for an
+            influx of new hashtags to appear around the same time as new pages
+            are added. This is because the new pages are likely to have a lot of
+            new hashtags, and these hashtags will be used in the future.
+        </p>
+        <p>
+            Take notes! Why is there an influx or a dip? What happened around
+            that time that explains why so many new notes were created? Was it
+            related to something specific? Why are there more journal entries
+            than new pages? Where did you focus on something? Go ahead and dive
+            into your Logseq pages.
+        </p>
+        <textarea
+            id="n-h-uses-split"
+            class="notes"
+            placeholder="Notes you want to make..."
+        ></textarea>
+        <!-- <div class="chart-container">
+            <canvas id="PageWords"></canvas>
+        </div> -->
+        <hr />
+        <h2>Mixed Analysis</h2>
+        <p>
+            So far, we have looked at pages and hashtags separately. Now, let's
+            overlay some of the data we have collected.
+        </p>
+        <p>
+            Let's take a look at the hashtag amount minus the created pages.
+            This should end in a normalized & flat curve. Assuming the hashtag
+            per page stays constant, this means that if there's a spike, it
+            indicates that one or a few pages have something going on. Go into
+            your Logseq files and see what happened.
+        </p>
+        <div class="chart-container">
+            <canvas id="mix_longevity"></canvas>
+        </div>
+        <p>
+            We already have gone over this, Why are there deviations? take a
+            loog around the time and once again note down the topics and other
+            realisations.
+        </p>
+        <textarea
+            id="n-m-longevity"
+            class="notes"
+            placeholder="Notes on Longevity Analysis..."
+        ></textarea>
+        <p>
+            Now, I took a really long time programming the next graph, so please
+            don't ignore it. Look at the evolution of your top 5 sentiments over
+            time. Did any notable things happen? Once more, I ask you to look at
+            your Logseq pages to find out what happened.
+        </p>
+        <div class="chart-container">
+            <canvas id="sentiment_evolution"></canvas>
+        </div>
+        <p>
+            I'm sure you have noticed that there's a lot of emotion in your
+            notes. Even though it was never intended to be a dramatic mess, but
+            your feelings are important... to the research we're doing. So
+            please take some time to reflect on them and see what happened.
+        </p>
+        <textarea
+            id="n-s-evolution"
+            class="notes"
+            placeholder="Notes on Sentiment Evolution..."
+        ></textarea>
+        <hr />
+        <h2>The Conclusion</h2>
+        <p>
+            You have taken a broad look and taken a closer look in your Logseq
+            files where needed. It's about time we looked at the notes you have
+            taken throughout.
+        </p>
+        <!-- this button is here so people click out of the textarea so the js can do its thing -->
+        <button id="Compile-notes">Compile my notes!</button>
+        <p>
+            Beautiful notes as they are, but they're not perfect. Let's rewrite
+            them to make them more contextually relevant.
+            <b>TL;DR: Let's make a proper summary of your insights.</b> This
+            will help you remember what you were thinking when you wrote it and
+            also help others understand your thoughts better.
+        </p>
+        <p>
+            By now, you should have a nice pile of text with different themes
+            and topics. It's time to start summarizing them. Remove the noise
+            and combine double entries. After that, take a nice look and find
+            those
+            <b>overachieving hashtags</b> and
+            <b>gaps to split your Logseq graphs</b>, which I was talking about
+            all the way in the beginning.
+        </p>
+        <p>Or just copy you're notes.</p>
+        <p>Now, here are the notes you took:</p>
+        <div class="left-liner">
+            <p id="note-view1" class="note-view">
+                You didn't take any notes here...
+            </p>
+            <p id="note-view2" class="note-view">
+                You didn't take any notes here...
+            </p>
+            <p id="note-view3" class="note-view">
+                You didn't take any notes here...
+            </p>
+            <p id="note-view4" class="note-view">
+                You didn't take any notes here...
+            </p>
+            <p id="note-view5" class="note-view">
+                You didn't take any notes here...
+            </p>
+        </div>
+        <p>
+            Although there is no text area provided for you, you can still type
+            them down in a text editor like Word or Notepad++.
+        </p>
+        <!-- <p>How to organize your document?</p>
+        <p>
+            First, start with an short indroduction to what this is about.
+            Next, make a litle list of your key 
+        </p> -->
+    </body>
+</html>

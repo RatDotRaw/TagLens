@@ -12,6 +12,10 @@ class Neo4jIntegration:
     def __init__(self):
         self.driver = None
 
+        self.connect()
+        self.ensure_constraints()
+        self.close()
+
     def connect(self):
         """Establish a connection to Neo4j."""
         try:
@@ -133,9 +137,3 @@ class Neo4jIntegration:
                 logging.info(f"Inserted/Updated page: {page.name}")
             except Exception as e:
                 logging.error(f"Failed to insert/update page: {page.name} with error: {e}")
-
-
-neo4j_db = Neo4jIntegration()
-neo4j_db.connect()
-neo4j_db.ensure_constraints()
-neo4j_db.close()

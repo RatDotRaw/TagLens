@@ -59,7 +59,7 @@ def crawl(path, hidden_files = False) -> set[File]:
     return file_set
 
 # function to get the created time of a file
-def get_page_date(file_name: str) -> Optional[datetime]:
+def get_page_date(file_name: str) -> Optional[datetime.datetime]:
     """
     Returns the creation time of a file.
 

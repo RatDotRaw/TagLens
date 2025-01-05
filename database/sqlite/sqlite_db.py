@@ -118,62 +118,6 @@ class SqliteIntegration:
             session.rollback()
             raise ValueError(f"Failed to insert/update hashtag: {hashtag.name} with error: {e}")
 
-    # def insert_page(self, page: PageClass):
-    #     """
-    #     Insert or update a page in the database.
-
-    #     Args:
-    #         session (Session): SQLAlchemy session to interact with the database.
-    #         page (Page): The Page object containing data to insert or update.
-        
-    #     """
-    #     try:
-    #         session = self.sessionLocal()
-
-    #         # Check if the page exists
-    #         db_page = session.query(Page).filter_by(name=page.name).first()
-
-    #         if db_page is None:
-    #             # Insert new page
-    #             db_page = Page(
-    #                 name = page.name,
-    #                 file_name = page.file.name,
-    #                 tag_count = page.tag_count, 
-    #                 word_count = page.word_count,
-    #                 sentiment_tags = json.dumps(page.sentiment_tags),
-    #                 category= page.category,
-    #                 journal_entry = page.journal_entry,
-    #                 date = page.date
-    #             )
-    #             session.add(db_page)
-    #         else:
-    #             # Update existing page
-    #             db_page.tag_count = page.tag_count
-    #             db_page.word_count = page.word_count
-    #             db_page.sentiment_tags = json.dumps(page.sentiment_tags)
-    #             db_page.category = page.category
-    #             db_page.journal_entry = page.journal_entry
-    #             db_page.date = page.date
-            
-    #         # Link file to page
-    #         db_file = session.query(File).filter_by(fullpath=page.file.fullpath).first()
-    #         if not db_file:
-    #             # Insert a new file record if it doesn't exist
-    #             self.insert_file(page.file)
-    #             db_file = session.query(File).filter_by(fullpath=page.file.fullpath).first()  # Fetch the inserted file
-
-    #         # Link the existing or newly inserted file with the page
-    #         if db_file and db_page:
-    #             # one-to-one relationship: set the file for the page
-    #             db_page.file_id = db_file.id
-
-    #         session.commit()
-    #     except SQLAlchemyError as e:
-    #         session.rollback()
-    #         raise ValueError(f"Failed to insert/update page: {page.name} with error: {e}")
-
-
-
     def insert_page(self, page: PageClass):
         """
         Insert or update a page in the database.
