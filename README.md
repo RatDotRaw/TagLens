@@ -7,7 +7,7 @@
 
 > This project has only been tested on Python 3.11 and Python 3.12.
 
-> You can get Python 3.11 or Python 3.12 from [python.org](https://www.python.org/downloads/).
+> You can get Python 3.11 or Python 3.12 from [python.org](https://www.python.org/downloads/) or from the Microsoft store (easier setup).
 
 1. **Create a virtual environment and activate it**
    
@@ -26,6 +26,13 @@
 
 Before you can run the scripts, you'll need to set some environment variables.
 You can rename the included `example-env` to `.env` and set all the variables there.
+
+### Set the logseq graph path
+
+The scaper is going to need your **Logseq graph**. You can configure this by setting `LOGSEQ_BASE_PATH` in the `.env`
+```env
+LOGSEQ_BASE_PATH = "/home/stafd/Documents/git/logseq"
+```
 
 ### Selection of Database
 
